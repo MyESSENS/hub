@@ -3,10 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESSENS Hub | Ghid & Resurse Interactive</title>
+   <title>ESSENS Hub | Aplicația de Resurse & Suport Digital</title>
+
+    <!-- Descrierea generală pentru motoarele de căutare -->
+    <meta name="description" content="Spațiul tău digital pentru asistență și materiale premium. Descoperă portofoliul exclusiv de produse, cataloagele interactive și ghidurile oficiale de configurare.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / WhatsApp, Facebook, Messenger -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://myessens.github.io/hub/">
+    <meta property="og:title" content="ESSENS Hub — Portofoliu Oficial & Asistență">
+    <meta property="og:description" content="Bun venit în spațiul digital de suport. Aici poți consulta colecțiile actualizate în format interactiv, cataloagele de produse și ghidul rapid de acces. Totul simplu, securizat și la un click distanță.">
+    <meta property="og:image" content="https://myessens.github.io/hub/logo.png">
+    <meta property="og:site_name" content="ESSENS Hub">
+    <meta property="og:locale" content="ro_RO">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ESSENS Hub — Portofoliu Oficial & Asistență">
+    <meta name="twitter:description" content="Consultă colecțiile interactive de produse și ghidurile oficiale de suport.">
+    <meta name="twitter:image" content="https://myessens.github.io/hub/logo.png">
+    <!-- ================================================================= -->
+    
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2bb99776-312e-4518-8df2-f5f21eb3b726"></script>
     
     <!-- 1. FAVICON -->
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="logo.png">
     
     <style>
         /* --- 1. STILURI GENERALE ȘI RESET --- */
@@ -138,11 +160,11 @@
             transform: translateY(0);
         }
 
-        /* --- AVATAR PROFIL (MODIFICAT PENTRU SUPRAPUNERE DE 50%) --- */
+        /* --- AVATAR PROFIL --- */
         .profile-avatar-container {
             display: flex;
             justify-content: center;
-            margin-bottom: -40px; /* Coboară poza exact până la jumătatea ei (80px / 2) */
+            margin-bottom: -40px;
             position: relative;
             z-index: 2;
         }
@@ -155,8 +177,6 @@
             border: 4px solid #ffffff;
             box-shadow: 0 8px 20px rgba(138, 79, 255, 0.1);
             background-color: #f1eaff;
-            
-            /* Centrare text alt în caz că poza nu se încarcă (rezolvă problema vizuală din screenshot) */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,12 +187,12 @@
             padding: 4px;
         }
 
-        /* --- CASETA DE DESCRIERE (AJUSTATĂ PENTRU NOUA SUPRAPUNERE) --- */
+        /* --- CASETA DE DESCRIERE --- */
         .intro-box {
             background: linear-gradient(135deg, #ffffff, #fbf9ff);
             border: 1px solid rgba(138, 79, 255, 0.08);
             border-radius: 16px;
-            padding: 55px 18px 20px 18px; /* Crescut padding-top de la 35px la 55px ca poza să nu acopere textul */
+            padding: 55px 18px 20px 18px;
             margin-bottom: 20px;
             box-shadow: 0 4px 20px rgba(138, 79, 255, 0.02);
             text-align: center;
@@ -186,6 +206,7 @@
 
         /* --- CARDURI INTERACTIVE --- */
         .card {
+            position: relative;
             background: white;
             border-radius: 16px;
             margin-bottom: 14px;
@@ -193,7 +214,6 @@
             box-shadow: 0 4px 16px rgba(138, 79, 255, 0.03);
             border: 1px solid rgba(138, 79, 255, 0.05);
             cursor: pointer;
-            
             display: grid;
             grid-template-rows: auto 0fr; 
             transition: grid-template-rows 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
@@ -207,6 +227,28 @@
             box-shadow: 0 6px 20px rgba(138, 79, 255, 0.05);
         }
 
+        /* --- BUBBLE NOTIFICARE (STIL MOBIL) --- */
+        .app-badge {
+            position: absolute;
+            top: -6px;
+            right: 12px;
+            background-color: #8a4fff;
+            color: white;
+            font-size: 0.68rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(138, 79, 255, 0.3);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+
+        .app-badge.alt {
+            background-color: #7a6e85;
+            box-shadow: 0 2px 8px rgba(122, 110, 133, 0.25);
+        }
+
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -218,6 +260,11 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            min-width: 0;
+        }
+
+        .card-text-holder {
+            min-width: 0;
         }
 
         .card-icon-container {
@@ -230,10 +277,21 @@
         }
 
         .card h3 {
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: #1a1124;
             line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card p.sub-label {
+            font-size: 0.76rem;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .arrow-container {
@@ -245,6 +303,7 @@
             justify-content: center;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             margin-left: 8px;
+            flex-shrink: 0;
         }
 
         .card-wrapper {
@@ -277,14 +336,52 @@
             color: #8a4fff;
         }
 
-        /* --- GHID COMPLET --- */
-        .step-intro {
-            font-size: 0.92rem;
-            color: #5c5266;
+        /* --- PRESTYLING / CASETA INTRO GHID --- */
+        .info-callout-box {
+            background-color: #f9f6fe;
+            border-left: 4px solid #8a4fff;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            text-align: left;
+            box-shadow: inset 0 0 8px rgba(138, 79, 255, 0.02);
+        }
+
+        .info-callout-icon {
+            color: #8a4fff;
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .info-callout-text {
+            font-size: 0.88rem;
+            color: #4a3b5c;
             line-height: 1.55;
-            margin-bottom: 18px;
-            padding-bottom: 12px;
-            border-bottom: 1px dashed #f0ebf7;
+        }
+
+        /* --- GHID COMPLET OPORTUNITATE --- */
+        .tutorial-heading {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #1a1124;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 22px 0 14px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tutorial-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(138, 79, 255, 0.15), transparent);
         }
 
         .step-block {
@@ -292,7 +389,7 @@
             position: relative;
         }
 
-        .step-block:last-child { margin-bottom: 10px; }
+        .step-block:last-child { margin-bottom: 15px; }
 
         .step-header {
             display: flex;
@@ -316,13 +413,13 @@
         }
 
         .step-title {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #2d2638;
         }
 
         .step-desc {
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             color: #695d75;
             line-height: 1.5;
             padding-left: 32px;
@@ -344,15 +441,15 @@
             padding: 12px 14px;
             border-radius: 12px;
             margin-bottom: 8px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: background-color 0.2s, background 0.2s, transform 0.2s;
         }
 
         .sub-button.primary-action {
             background-color: #8a4fff;
             color: white;
-            margin-top: 15px;
+            margin-top: 20px;
             box-shadow: 0 4px 12px rgba(138, 79, 255, 0.15);
             padding: 14px;
             text-align: center;
@@ -373,14 +470,15 @@
             align-items: center;
             gap: 10px;
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            min-width: 0;
+            width: 100%;
         }
 
         .btn-inner-content span {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-size: 0.88rem;
         }
 
         .svg-icon {
@@ -511,8 +609,8 @@
         @media (max-width: 360px) {
             .welcome-title { font-size: 1.8rem; }
             .intro-box p { font-size: 0.9rem; }
-            .card h3 { font-size: 0.92rem; }
-            .sub-button { font-size: 0.85rem; padding: 10px 12px; }
+            .card h3 { font-size: 0.88rem; }
+            .sub-button { font-size: 0.82rem; padding: 10px 12px; }
             .chat-half { font-size: 0.82rem; padding: 12px 8px; }
         }
 
@@ -609,16 +707,22 @@
             </div>
         </div>
 
-        <!-- CARDUL 2: TUTORIAL PAS CU PAS -->
+        <!-- CARDUL 2: TUTORIAL PAS CU PAS (ÎNREGISTRARE / PARTENERIAT) -->
         <div class="card" onclick="toggleCard(this)">
+            <!-- Notification Bubble -->
+            <div class="app-badge">Reduceri</div>
+            
             <div class="card-header">
                 <div class="card-title-block">
                     <div class="card-icon-container">
                         <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#guideGradient)">
-                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                         </svg>
                     </div>
-                    <h3>Ghid Înregistrare Pas cu Pas</h3>
+                    <div class="card-text-holder">
+                        <h3>Devino Partener ESSENS</h3>
+                        <p class="sub-label" style="color: #8a4fff; font-weight: 500;">Economisește inteligent și crește în ritmul tău</p>
+                    </div>
                 </div>
                 <div class="arrow-container">
                     <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -627,50 +731,70 @@
             <div class="card-wrapper">
                 <div class="card-body" onclick="event.stopPropagation();">
                     
-                    <div class="step-intro">
-                        Crearea contului tău gratuit pe platforma oficială durează mai puțin de 3 minute. Iată cum este structurată pagina securizată, pentru a te asigura că totul decurge perfect:
+                    <!-- CASETA INTRODUCTIVĂ PRESTILIZATĂ -->
+                    <div class="info-callout-box">
+                        <svg class="info-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        <div class="info-callout-text">
+                            Crearea unui cont este <span class="highlight-text">complet gratuită</span> și nu te obligă la nimic  <i>(fără comenzi minime sau taxe)</i> . Îți oferă libertatea de a comanda produse direct la <span class="highlight-text">preț redus de fabrică</span> și acces la un venit suplimentar de acasă.
+                        </div>
                     </div>
+
+                    <!-- TITLU DE TUTORIAL DETALIAT -->
+                    <div class="tutorial-heading">Ghid rapid de configurare</div>
                     
                     <div class="step-block">
                         <div class="step-header">
                             <span class="step-number">1</span>
-                            <h4 class="step-title">ID Sponsor Completat Automat</h4>
+                            <h4 class="step-title">Accesarea formularului securizat</h4>
                         </div>
-                        <p class="step-desc">Când se deschide pagina de înregistrare, vei observa că în prima căsuță, <span class="highlight-text">„ID sau e-mailul sponsorului”</span>, codul meu este deja introdus. <span class="highlight-text">Lasă-l exact așa cum este</span> – acest detaliu garantează că vei face parte din structura mea și că vei beneficia de suport direct.</p>
+                        <p class="step-desc">Apasă pe butonul de mai jos: <span class="highlight-text">„Activează Contul tău de Membru”</span>. Pagina oficială de înregistrare ESSENS se va deschide într-o filă nouă.</p>
                     </div>
 
                     <div class="step-block">
                         <div class="step-header">
                             <span class="step-number">2</span>
-                            <h4 class="step-title">Alege modalitatea ta preferată</h4>
+                            <h4 class="step-title">Verificarea ID-ului de Sponsor</h4>
                         </div>
-                        <p class="step-desc">Poți opta pentru completarea standard a datelor tale (Nume, Prenume, E-mail, Telefon) sau poți economisi timp utilizând opțiunile rapide de conectare securizată prin <span class="highlight-text">Google, Apple ID</span> sau <span class="highlight-text">Facebook</span>.</p>
+                        <p class="step-desc">Odată deschis link-ul, prima căsuță de sus numită <span class="highlight-text">„ID Sponsor”</span> va fi deja completată automat cu codul meu. <span class="highlight-text">Lasă-l exact așa cum este</span> pentru a fi repartizat în echipa mea și pentru a primi suport gratuit permanent.</p>
                     </div>
 
                     <div class="step-block">
                         <div class="step-header">
                             <span class="step-number">3</span>
-                            <h4 class="step-title">Creează o parolă sigură</h4>
+                            <h4 class="step-title">Metoda de înregistrare rapidă</h4>
                         </div>
-                        <p class="step-desc">Introdu parola dorită și confirm-o în câmpul următor. Pentru securitatea contului tău, sistemul îți va cere să îndeplinești criteriile de bază afișate: minimum 8 caractere, o literă mică, una mare, un număr și un simbol special (precum *, #, & sau ?).</p>
+                        <p class="step-desc">Poți opta pentru completarea manuală sau poți alege metoda mult mai rapidă și sigură din zona de sus: autentificarea instant prin rețelele tale folosind pictogramele <span class="highlight-text">Google, Apple ID</span> sau <span class="highlight-text">Facebook</span>.</p>
                     </div>
 
                     <div class="step-block">
                         <div class="step-header">
                             <span class="step-number">4</span>
-                            <h4 class="step-title">Bifele de siguranță</h4>
+                            <h4 class="step-title">Datele tale personale și Parola</h4>
                         </div>
-                        <p class="step-desc">La final, pentru a-ți putea activa noul cont, este nevoie doar să bifezi <span class="highlight-text">primele 3 casete obligatorii</span> (cele marcate cu steluță roșie în pagină). Prin ele confirmi pur și simplu că ai peste 16 ani, că ești de acord cu termenii comunității și cu stocarea datelor în deplină siguranță.</p>
+                        <p class="step-desc">Completează restul casetelor rămase goale (Nume, Prenume, Telefon, Email). La finalul formularului, creează o parolă puternică de cel puțin 8 caractere (care să includă o literă mare, o literă mică, o cifră și un simbol special).</p>
+                    </div>
+
+                    <div class="step-block">
+                        <div class="step-header">
+                            <span class="step-number">5</span>
+                            <h4 class="step-title">Validarea finală și Confirmarea</h4>
+                        </div>
+                        <p class="step-desc">Bifează <span class="highlight-text">primele 3 căsuțe obligatorii</span> de la baza paginii pentru acceptarea termenilor, iar apoi apasă butonul mare de finalizare. Vei primi imediat un email de bun venit cu datele noului tău magazin virtual cu reduceri!</p>
                     </div>
 
                     <a href="https://www.essens.md/r-830000081?lang=ro" target="_blank" class="sub-button primary-action">
                         <div class="btn-inner-content">
                             <svg class="svg-icon" viewBox="0 0 24 24" style="stroke-width: 2.5; margin-right: 2px;">
-                                <path d="M4.5 16.5c-1.5 1.5-2.5 3.5-2.5 5.5C4 22 6 21 7.5 19.5"></path>
-                                <path d="M12 12l9-9-3 12-6 3-3-3z"></path>
-                                <path d="M9 15l3-3"></path>
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
                             </svg>
-                            <span>Deschide Pagina Oficială și Înregistrează-te</span>
+                            <span>Activează Contul tău de Membru</span>
                         </div>
                     </a>
                 </div>
@@ -686,7 +810,9 @@
                             <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                         </svg>
                     </div>
-                    <h3>Cataloage și Materiale</h3>
+                    <div class="card-text-holder">
+                        <h3>Cataloage și Materiale</h3>
+                    </div>
                 </div>
                 <div class="arrow-container">
                     <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -732,28 +858,45 @@
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
                         </svg>
                     </div>
-                    <h3>Alte țări / Înregistrare Internațională</h3>
+                    <div class="card-text-holder">
+                        <h3>Înregistrare Internațională</h3>
+                    </div>
                 </div>
                 <div class="arrow-container">
                     <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
             </div>
             <div class="card-wrapper">
-                <!-- in lucru
-                <div class="card-body" onclick="event.stopPropagation();">
-                    <a href="index.html" target="_blank" class="sub-button">
-                        <div class="btn-inner-content">
-                            <svg class="svg-icon" viewBox="0 0 24 24">
-                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                            </svg>
-                            <span>fara momentan</span>
-                        </div>
-                    </a>
-                </div>
-                -->
+                <!-- Spatiu rezervat pentru viitor -->
             </div>
         </div>
+
+        <!-- CARDURI LINK DE JOS: MAGAZIN PREȚ ÎNTREG -->
+        <a href="https://my.essens.com/830000081" target="_blank" style="text-decoration: none; display: block;">
+            <div class="card" style="grid-template-rows: auto; margin-top: 25px;">
+                <!-- Notification Bubble Actualizat -->
+                <div class="app-badge alt">Preț Întreg</div>
+                
+                <div class="card-header">
+                    <div class="card-title-block">
+                        <div class="card-icon-container">
+                            <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="none" stroke="#b2a4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                            </svg>
+                        </div>
+                        <div class="card-text-holder">
+                            <h3>Magazin Online Essens</h3>
+                            <p class="sub-label" style="color: #7a6e85; font-weight: 400;">Comandă rapid, direct la tine acasă</p>
+                        </div>
+                    </div>
+                    <div class="arrow-container" style="transform: rotate(-90deg); color: #b2a4bf;">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </div>
+                </div>
+            </div>
+        </a>
 
         <!-- MODULUL ASISTENȚĂ -->
         <div class="support-section">
@@ -817,6 +960,8 @@
         });
 
         function toggleCard(cardElement) {
+            if (cardElement.parentElement.tagName === 'A') return;
+
             document.querySelectorAll('.card').forEach(c => {
                 if (c !== cardElement) c.classList.remove('active');
             });
