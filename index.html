@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ESSENS Hub</title>
 
-    <meta name="description" content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
+    <meta name="description"
+        content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Viber & WhatsApp Layout -->
+
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://myessens.github.io/hub/">
-    <meta property="og:title" content="E-Hub — Powered by ESSENS"> <!-- Identitate puternică -->
-    <meta property="og:description" content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive."> <!-- Propoziție fluidă -->
+    <meta property="og:title" content="E-Hub — Powered by ESSENS">
+    <meta property="og:description"
+        content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
     <meta property="og:image" content="https://myessens.github.io/hub/logo_300x300.png">
     <meta property="og:site_name" content="ESSENS Hub">
     <meta property="og:locale" content="ro_RO">
-    
-    <!-- Twitter Card -->
+
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="E-Hub — Powered by ESSENS">
-    <meta name="twitter:description" content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
+    <meta name="twitter:description"
+        content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
     <meta name="twitter:image" content="https://myessens.github.io/hub/logo_300x300.png">
-    <!-- ================================================================= -->
-    
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2bb99776-312e-4518-8df2-f5f21eb3b726"></script>
-    
-    <!-- 1. FAVICON -->
+
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="2bb99776-312e-4518-8df2-f5f21eb3b726"></script>
+
     <link rel="icon" type="image/x-icon" href="logo_300x300.png">
-    
+
     <style>
         /* --- 1. STILURI GENERALE ȘI RESET --- */
         * {
@@ -83,7 +84,6 @@
             gap: 12px;
         }
 
-        /* --- BARA DE LOADING --- */
         .loader-container {
             width: 160px;
             position: relative;
@@ -117,11 +117,10 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- HEADER FIX DUPĂ ÎNCĂRCARE --- */
         body.scrolled .hero-section {
             height: 65px;
             border-bottom: 1px solid rgba(138, 79, 255, 0.08);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.01);
             background-color: rgba(252, 250, 255, 0.95);
             backdrop-filter: blur(10px);
             padding: 0 15px;
@@ -159,7 +158,6 @@
             transform: translateY(0);
         }
 
-        /* --- AVATAR PROFIL --- */
         .profile-avatar-container {
             display: flex;
             justify-content: center;
@@ -186,7 +184,6 @@
             padding: 4px;
         }
 
-        /* --- CASETA DE DESCRIERE --- */
         .intro-box {
             background: linear-gradient(135deg, #ffffff, #fbf9ff);
             border: 1px solid rgba(138, 79, 255, 0.08);
@@ -203,7 +200,7 @@
             line-height: 1.55;
         }
 
-        /* --- CARDURI INTERACTIVE --- */
+        /* --- CARDURI --- */
         .card {
             position: relative;
             background: white;
@@ -214,10 +211,10 @@
             border: 1px solid rgba(138, 79, 255, 0.05);
             cursor: pointer;
             display: grid;
-            grid-template-rows: auto 0fr; 
-            transition: grid-template-rows 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
-                        transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-                        box-shadow 0.3s ease;
+            grid-template-rows: auto 0fr;
+            transition: grid-template-rows 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+                box-shadow 0.3s ease;
             will-change: grid-template-rows, transform;
         }
 
@@ -226,7 +223,6 @@
             box-shadow: 0 6px 20px rgba(138, 79, 255, 0.05);
         }
 
-        /* --- BUBBLE NOTIFICARE (STIL MOBIL) --- */
         .app-badge {
             position: absolute;
             top: -6px;
@@ -327,7 +323,7 @@
             padding-top: 14px;
             margin-top: 14px;
             border-top: 1px dashed #efeaf5;
-            transition: opacity 0.4s ease 0.1s, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.05s; 
+            transition: opacity 0.4s ease 0.1s, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) 0.05s;
         }
 
         .card.active .arrow-container {
@@ -335,7 +331,6 @@
             color: #8a4fff;
         }
 
-        /* --- PRESTYLING / CASETA INTRO GHID --- */
         .info-callout-box {
             background-color: #f9f6fe;
             border-left: 4px solid #8a4fff;
@@ -363,7 +358,6 @@
             line-height: 1.55;
         }
 
-        /* --- GHID COMPLET OPORTUNITATE --- */
         .tutorial-heading {
             font-size: 0.88rem;
             font-weight: 700;
@@ -388,7 +382,9 @@
             position: relative;
         }
 
-        .step-block:last-child { margin-bottom: 15px; }
+        .step-block:last-child {
+            margin-bottom: 15px;
+        }
 
         .step-header {
             display: flex;
@@ -429,6 +425,92 @@
             font-weight: 600;
         }
 
+        /* --- STILURI GRILĂ INTERNAȚIONALĂ --- */
+        .international-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 4px 2px;
+        }
+
+        .country-bubble {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f5fc;
+            border: 1px solid rgba(138, 79, 255, 0.05);
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .country-bubble:hover {
+            background-color: #f1eaff;
+            border-color: rgba(138, 79, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 79, 255, 0.06);
+        }
+
+        .country-bubble:active {
+            transform: scale(0.97);
+        }
+
+        .country-left-info {
+            display: flex;
+            align-items: center;
+            min-width: 0;
+        }
+
+        .flag-holder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 18px;
+            background: #eee;
+            border-radius: 3px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            margin-right: 10px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .country-name {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #4a3b5c;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Codul ISO din dreapta stilizat elegant */
+        .country-iso-code {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #b2a4bf;
+            background-color: rgba(138, 79, 255, 0.04);
+            padding: 2px 5px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+            margin-left: 6px;
+            border: 1px solid rgba(138, 79, 255, 0.02);
+            transition: all 0.2s ease;
+        }
+
+        .country-bubble:hover .country-name {
+            color: #8a4fff;
+        }
+
+        .country-bubble:hover .country-iso-code {
+            color: #8a4fff;
+            background-color: #ffffff;
+            border-color: rgba(138, 79, 255, 0.15);
+        }
+
         /* --- BUTOANE ȘI INLINE SVG --- */
         .sub-button {
             display: flex;
@@ -443,27 +525,73 @@
             font-size: 0.88rem;
             font-weight: 500;
             transition: background-color 0.2s, background 0.2s, transform 0.2s;
+            position: relative;
         }
 
+        /* PANGLICĂ PREMIUM PE COLȚ (RIBBON MILITAR/VETERAN CU SCHIMBARE DRAPEL) */
         .sub-button.primary-action {
             background-color: #8a4fff;
             color: white;
-            margin-top: 20px;
             box-shadow: 0 4px 12px rgba(138, 79, 255, 0.15);
-            padding: 14px;
-            text-align: center;
-            justify-content: center;
+            padding: 16px 55px 16px 20px; /* Spațiu în dreapta crescut special pentru a face loc panglicii */
+            text-align: left;
+            justify-content: flex-start;
+            overflow: hidden; /* Taie panglica la marginea butonului rotunjit */
         }
 
         .sub-button.primary-action .btn-inner-content {
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
         }
 
-        .sub-button:last-child { margin-bottom: 0; }
-        .sub-button:hover { background-color: #f1eaff; color: #8a4fff; }
-        .sub-button:active { transform: scale(0.98); }
-        
+        .sub-button:last-child {
+            margin-bottom: 0;
+        }
+
+        .sub-button:hover {
+            background-color: #f1eaff;
+            color: #8a4fff;
+        }
+
+        .sub-button.primary-action:hover {
+            background-color: #793eed;
+            color: white;
+        }
+
+        .sub-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Containerul structural pentru panglică */
+        .ribbon-corner-container {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        /* Panglica textilă oblică din CSS */
+        .ribbon-flag-strip {
+            position: absolute;
+            top: 7px;
+            right: -17px;
+            width: 62px;
+            height: 18px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Imagine default integrată: Steagul Moldovei (MD) */
+            background-image: url('https://flagcdn.com/w80/md.png');
+            transition: background-image 0.4s ease;
+        }
+
         .btn-inner-content {
             display: flex;
             align-items: center;
@@ -517,10 +645,13 @@
 
         .video-container iframe {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
-        /* --- SECȚIUNEA DE SUPORT --- */
         .support-section {
             margin-top: 30px;
             text-align: center;
@@ -560,11 +691,23 @@
             transition: background-color 0.2s ease;
         }
 
-        .chat-whatsapp { color: #1ebd59; }
-        .chat-messenger { color: #0084FF; }
+        .chat-whatsapp {
+            color: #1ebd59;
+        }
 
-        .chat-whatsapp:hover, .chat-whatsapp:active { background-color: rgba(30, 189, 89, 0.04); }
-        .chat-messenger:hover, .chat-messenger:active { background-color: rgba(0, 132, 255, 0.04); }
+        .chat-messenger {
+            color: #0084FF;
+        }
+
+        .chat-whatsapp:hover,
+        .chat-whatsapp:active {
+            background-color: rgba(30, 189, 89, 0.04);
+        }
+
+        .chat-messenger:hover,
+        .chat-messenger:active {
+            background-color: rgba(0, 132, 255, 0.04);
+        }
 
         .split-divider {
             position: absolute;
@@ -577,7 +720,6 @@
             z-index: 2;
         }
 
-        /* --- 9. FOOTER COPYRIGHT --- */
         .custom-footer {
             text-align: center;
             padding: 20px 16px;
@@ -604,24 +746,49 @@
             color: #8a4fff;
         }
 
-        /* --- OPTIMIZĂRI MOBIL --- */
         @media (max-width: 360px) {
-            .welcome-title { font-size: 1.8rem; }
-            .intro-box p { font-size: 0.9rem; }
-            .card h3 { font-size: 0.88rem; }
-            .sub-button { font-size: 0.82rem; padding: 10px 12px; }
-            .chat-half { font-size: 0.82rem; padding: 12px 8px; }
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+
+            .intro-box p {
+                font-size: 0.9rem;
+            }
+
+            .card h3 {
+                font-size: 0.88rem;
+            }
+
+            .sub-button {
+                font-size: 0.82rem;
+                padding: 10px 12px;
+            }
+
+            .chat-half {
+                font-size: 0.82rem;
+                padding: 12px 8px;
+            }
+
+            .international-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        /* --- ANIMAȚII --- */
         @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes fadeIn {
-            to { opacity: 1; }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
+
 <body class="loading">
 
     <svg width="0" height="0" style="position:absolute">
@@ -649,15 +816,15 @@
         </defs>
     </svg>
 
-    <!-- SECȚIUNEA HERO -->
     <div class="hero-section" id="hero">
         <h1 class="welcome-title">
             <span>Bine ai venit</span>
             <svg class="heart-svg" viewBox="0 0 24 24">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                <path
+                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
         </h1>
-        
+
         <div class="loader-container">
             <div class="loader-bar-bg">
                 <div class="loader-bar-fill" id="progressBar"></div>
@@ -666,91 +833,101 @@
         </div>
     </div>
 
-    <!-- CONȚINUTUL PRINCIPAL -->
     <div class="main-content">
 
-        <!-- AVATAR PROFIL -->
         <div class="profile-avatar-container">
-            <img src="https://lh3.googleusercontent.com/d/1V5JO_4TXOcDwwBl8jcRKyLqy8NApeYoc" alt="Consultant ESSENS" class="profile-avatar">
+            <img src="https://lh3.googleusercontent.com/d/1V5JO_4TXOcDwwBl8jcRKyLqy8NApeYoc" alt="Consultant ESSENS"
+                class="profile-avatar">
         </div>
 
-        <!-- CASETA DE INTRODUCERE -->
         <div class="intro-box">
             <p>
-                Am adunat aici tot ce ține de compania în care activez și mă dezvolt, ca să fie simplu și ușor de accesat pentru tine. Indiferent dacă îți dorești produse premium sau vrei să afli cum poți face parte din echipă, ai toate resursele strânse într-un singur loc.
+                Am adunat aici tot ce ține de compania în care activez și mă dezvolt, ca să fie simplu și ușor de
+                accesat pentru tine. Indiferent dacă îți dorești produse premium sau vrei să afli cum poți face parte
+                din echipă, ai toate resursele strânse într-un singur loc.
             </p>
         </div>
 
-        <!-- CARDUL 1: OPORTUNITATE VIDEO -->
         <div class="card" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-title-block">
                     <div class="card-icon-container">
                         <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#videoGradient)">
-                            <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 4h3v3H7V4zm0 5h3v3H7V9zm0 5h3v3H7v-3zm10 6H7v-1h10v1zm0-3h3v3h-3v-3zm0-5h3v3h-3V9zm0-5h3v3h-3V4z"/>
+                            <path
+                                d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM7 4h3v3H7V4zm0 5h3v3H7V9zm0 5h3v3H7v-3zm10 6H7v-1h10v1zm0-3h3v3h-3v-3zm0-5h3v3h-3V9zm0-5h3v3h-3V4z" />
                         </svg>
                     </div>
                     <h3>Prezentarea Oportunității</h3>
                 </div>
                 <div class="arrow-container">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                 </div>
             </div>
             <div class="card-wrapper">
                 <div class="card-body" onclick="event.stopPropagation();">
                     <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/jpSyeZOEm5U?si=c7gpF9M-BptJSRX_" allowfullscreen></iframe>
+                        <iframe src="https://www.youtube.com/embed/jpSyeZOEm5U?si=c7gpF9M-BptJSRX_"
+                            allowfullscreen></iframe>
                     </div>
-                    <p style="font-size: 0.82rem; color: #7a6e85; margin-bottom: 8px; text-align: center;">Urmărește acest scurt video explicativ.</p>
+                    <p style="font-size: 0.82rem; color: #7a6e85; margin-bottom: 8px; text-align: center;">Urmărește
+                        acest scurt video explicativ.</p>
                 </div>
             </div>
         </div>
 
-        <!-- CARDUL 2: TUTORIAL PAS CU PAS (ÎNREGISTRARE / PARTENERIAT) -->
         <div class="card" onclick="toggleCard(this)">
-            <!-- Notification Bubble -->
             <div class="app-badge">Reduceri</div>
-            
+
             <div class="card-header">
                 <div class="card-title-block">
                     <div class="card-icon-container">
                         <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#guideGradient)">
-                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                            <path
+                                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
                         </svg>
                     </div>
                     <div class="card-text-holder">
                         <h3>Devino Partener ESSENS</h3>
-                        <p class="sub-label" style="color: #8a4fff; font-weight: 500;">Economisește inteligent și crește în ritmul tău</p>
+                        <p class="sub-label" style="color: #8a4fff; font-weight: 500;">Economisește inteligent și crește
+                            în ritmul tău</p>
                     </div>
                 </div>
                 <div class="arrow-container">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                 </div>
             </div>
             <div class="card-wrapper">
                 <div class="card-body" onclick="event.stopPropagation();">
-                    
-                    <!-- CASETA INTRODUCTIVĂ PRESTILIZATĂ -->
+
                     <div class="info-callout-box">
-                        <svg class="info-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="info-callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <line x1="12" y1="16" x2="12" y2="12"></line>
                             <line x1="12" y1="8" x2="12.01" y2="8"></line>
                         </svg>
                         <div class="info-callout-text">
-                            Crearea unui cont este <span class="highlight-text">complet gratuită</span> și nu te obligă la nimic  <i>(fără comenzi minime sau taxe)</i> . Îți oferă libertatea de a comanda produse direct la <span class="highlight-text">preț redus de fabrică</span> și acces la un venit suplimentar de acasă.
+                            Crearea unui cont este <span class="highlight-text">complet gratuită</span> și nu te obligă
+                            la nimic <i>(fără comenzi minime sau taxe)</i>. Îți oferă libertatea de a comanda produse
+                            direct la <span class="highlight-text">preț redus de fabrică</span> și acces la un venit
+                            suplimentar de acasă.
                         </div>
                     </div>
 
-                    <!-- TITLU DE TUTORIAL DETALIAT -->
                     <div class="tutorial-heading">Ghid rapid de configurare</div>
-                    
+
                     <div class="step-block">
                         <div class="step-header">
                             <span class="step-number">1</span>
                             <h4 class="step-title">Accesarea formularului securizat</h4>
                         </div>
-                        <p class="step-desc">Apasă pe butonul de mai jos: <span class="highlight-text">„Activează Contul tău de Membru”</span>. Pagina oficială de înregistrare ESSENS se va deschide într-o filă nouă.</p>
+                        <p class="step-desc">Apasă pe butonul de mai jos: <span class="highlight-text">„Activează Contul
+                                tău de Membru”</span>. Pagina oficială de înregistrare ESSENS se va deschide într-o filă
+                            nouă.</p>
                     </div>
 
                     <div class="step-block">
@@ -758,7 +935,10 @@
                             <span class="step-number">2</span>
                             <h4 class="step-title">Verificarea ID-ului de Sponsor</h4>
                         </div>
-                        <p class="step-desc">Odată deschis link-ul, prima căsuță de sus numită <span class="highlight-text">„ID Sponsor”</span> va fi deja completată automat cu codul meu. <span class="highlight-text">Lasă-l exact așa cum este</span> pentru a fi repartizat în echipa mea și pentru a primi suport gratuit permanent.</p>
+                        <p class="step-desc">Odată deschis link-ul, prima căsuță de sus numită <span
+                                class="highlight-text">„ID Sponsor”</span> va fi deja completată automat cu codul meu.
+                            <span class="highlight-text">Lasă-l exact așa cum este</span> pentru a fi repartizat în
+                            echipa mea și pentru a primi suport gratuit permanent.</p>
                     </div>
 
                     <div class="step-block">
@@ -766,7 +946,10 @@
                             <span class="step-number">3</span>
                             <h4 class="step-title">Metoda de înregistrare rapidă</h4>
                         </div>
-                        <p class="step-desc">Poți opta pentru completarea manuală sau poți alege metoda mult mai rapidă și sigură din zona de sus: autentificarea instant prin rețelele tale folosind pictogramele <span class="highlight-text">Google, Apple ID</span> sau <span class="highlight-text">Facebook</span>.</p>
+                        <p class="step-desc">Poți opta pentru completarea manuală sau poți alege metoda mult mai rapidă
+                            și sigură din zona de sus: autentificarea instant prin rețelele tale folosind pictogramele
+                            <span class="highlight-text">Google, Apple ID</span> sau <span
+                                class="highlight-text">Facebook</span>.</p>
                     </div>
 
                     <div class="step-block">
@@ -774,7 +957,8 @@
                             <span class="step-number">4</span>
                             <h4 class="step-title">Datele tale personale și Parola</h4>
                         </div>
-                        <p class="step-desc">Completează restul casetelor rămase goale (Nume, Prenume, Telefon, Email). La finalul formularului, creează o parolă puternică de cel puțin 8 caractere (care să includă o literă mare, o literă mică, o cifră și un simbol special).</p>
+                        <p class="step-desc">Completează restul casetelor rămase goale (Nume, Prenume, Telefon, Email).
+                            La finalul formularului, creează o parolă puternică de cel puțin 8 caractere.</p>
                     </div>
 
                     <div class="step-block">
@@ -782,10 +966,17 @@
                             <span class="step-number">5</span>
                             <h4 class="step-title">Validarea finală și Confirmarea</h4>
                         </div>
-                        <p class="step-desc">Bifează <span class="highlight-text">primele 3 căsuțe obligatorii</span> de la baza paginii pentru acceptarea termenilor, iar apoi apasă butonul mare de finalizare. Vei primi imediat un email de bun venit cu datele noului tău magazin virtual cu reduceri!</p>
+                        <p class="step-desc">Bifează <span class="highlight-text">primele 3 căsuțe obligatorii</span> de
+                            la baza paginii pentru acceptarea termenilor, iar apoi apasă butonul mare de finalizare.</p>
                     </div>
 
-                    <a href="https://www.essens.md/r-830000081?lang=ro" target="_blank" class="sub-button primary-action">
+                    <a id="mainPartnerBtn" href="https://www.essens.md/r-830000081" target="_blank"
+                        class="sub-button primary-action">
+                        
+                        <div class="ribbon-corner-container">
+                            <div class="ribbon-flag-strip" id="btnRibbonFlag"></div>
+                        </div>
+
                         <div class="btn-inner-content">
                             <svg class="svg-icon" viewBox="0 0 24 24" style="stroke-width: 2.5; margin-right: 2px;">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -800,26 +991,28 @@
             </div>
         </div>
 
-        <!-- CARDUL 3: CATALOAGE -->
         <div class="card" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-title-block">
                     <div class="card-icon-container">
                         <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#catalogGradient)">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
                         </svg>
                     </div>
                     <div class="card-text-holder">
-                        <h3>Cataloage și Materiale</h3>
+                        <h3>Catalog și Resurse Informative</h3>
                     </div>
                 </div>
                 <div class="arrow-container">
-                    <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
                 </div>
             </div>
             <div class="card-wrapper">
                 <div class="card-body" onclick="event.stopPropagation();">
-                    
+
                     <a href="catalog_parfumuri.pdf" download="Catalog_Parfumuri_ESSENS.pdf" class="sub-button">
                         <div class="btn-inner-content">
                             <svg class="svg-icon" viewBox="0 0 24 24">
@@ -831,7 +1024,7 @@
                             <span>Catalog Parfumuri (PDF)</span>
                         </div>
                     </a>
-                    
+
                     <a href="catalog_produse.pdf" download="Catalog_Produse_ESSENS.pdf" class="sub-button">
                         <div class="btn-inner-content">
                             <svg class="svg-icon" viewBox="0 0 24 24">
@@ -843,13 +1036,12 @@
                             <span>Catalog Alte Produse (PDF)</span>
                         </div>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
 
-        <!-- CARDUL 4: ÎNREGISTRARE INTERNAȚIONALĂ -->
-        <div class="card" onclick="toggleCard(this)">
+        <div class="card" id="internationalCard" onclick="toggleCard(this)">
             <div class="card-header">
                 <div class="card-title-block">
                     <div class="card-icon-container">
@@ -866,20 +1058,267 @@
                 </div>
             </div>
             <div class="card-wrapper">
-                <!-- Spatiu rezervat pentru viitor -->
+                <div class="card-body" onclick="event.stopPropagation();">
+                    
+                    <div style="margin-bottom: 14px; position: relative;">
+                        <input type="text" id="countrySearch" placeholder="Caută după țară sau cod (ex: România, RO)..." 
+                               style="width: 100%; padding: 10px 14px 10px 36px; font-size: 0.85rem; border: 1px solid rgba(138, 79, 255, 0.1); border-radius: 10px; background-color: #fcfaff; color: #2d2638; outline: none; transition: all 0.2s;"
+                               onfocus="this.style.borderColor='rgba(138, 79, 255, 0.4)'; this.style.backgroundColor='#ffffff'; this.style.boxShadow='0 2px 8px rgba(138, 79, 255, 0.04)';"
+                               onblur="this.style.borderColor='rgba(138, 79, 255, 0.1)'; this.style.backgroundColor='#fcfaff'; this.style.boxShadow='none';"
+                               onkeyup="filterCountries()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#b2a4bf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" 
+                             style="width: 14px; height: 14px; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); pointer-events: none;">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+
+                    <div class="international-grid" id="countriesGrid">
+                        <a href="https://www.essens.at/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/at.png" alt="AT" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Austria</span>
+                            </div>
+                            <span class="country-iso-code">at</span>
+                        </a>
+                        <a href="https://www.essensworld.be/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/be.png" alt="BE" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Belgia</span>
+                            </div>
+                            <span class="country-iso-code">be</span>
+                        </a>
+                        <a href="https://www.essens.ba/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ba.png" alt="BA" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Bosnia Herț.</span>
+                            </div>
+                            <span class="country-iso-code">ba</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/bg.png" alt="BG" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Bulgaria</span>
+                            </div>
+                            <span class="country-iso-code">bg</span>
+                        </a>
+                        <a href="https://www.essens.cz/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/cz.png" alt="CZ" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Cehia</span>
+                            </div>
+                            <span class="country-iso-code">cz</span>
+                        </a>
+                        <a href="https://www.essens.com.cy/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/cy.png" alt="CY" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Cipru</span>
+                            </div>
+                            <span class="country-iso-code">cy</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/dk.png" alt="DK" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Danemarca</span>
+                            </div>
+                            <span class="country-iso-code">dk</span>
+                        </a>
+                        <a href="https://www.essenseurope.ee/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ee.png" alt="EE" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Estonia</span>
+                            </div>
+                            <span class="country-iso-code">ee</span>
+                        </a>
+                        <a href="https://www.essensworld.fr/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/fr.png" alt="FR" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Franța</span>
+                            </div>
+                            <span class="country-iso-code">fr</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/fi.png" alt="FI" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Finlanda</span>
+                            </div>
+                            <span class="country-iso-code">fi</span>
+                        </a>
+                        <a href="https://www.essensworld.de/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/de.png" alt="DE" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Germania</span>
+                            </div>
+                            <span class="country-iso-code">de</span>
+                        </a>
+                        <a href="https://www.essens.gr/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/gr.png" alt="GR" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Grecia</span>
+                            </div>
+                            <span class="country-iso-code">gr</span>
+                        </a>
+                        <a href="https://www.essens.it/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/it.png" alt="IT" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Italia</span>
+                            </div>
+                            <span class="country-iso-code">it</span>
+                        </a>
+                        <a href="https://www.essens.ie/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ie.png" alt="IE" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Irlanda</span>
+                            </div>
+                            <span class="country-iso-code">ie</span>
+                        </a>
+                        <a href="https://www.essensworld.kz/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/kz.png" alt="KZ" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Kazahstan</span>
+                            </div>
+                            <span class="country-iso-code">kz</span>
+                        </a>
+                        <a href="https://www.essenseurope.lv/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/lv.png" alt="LV" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Letonia</span>
+                            </div>
+                            <span class="country-iso-code">lv</span>
+                        </a>
+                        <a href="https://www.essens.lt/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/lt.png" alt="LT" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Lituania</span>
+                            </div>
+                            <span class="country-iso-code">lt</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/lu.png" alt="LU" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Luxemburg</span>
+                            </div>
+                            <span class="country-iso-code">lu</span>
+                        </a>
+                        <a href="https://www.essens.co.uk/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/gb.png" alt="GB" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Marea Britanie</span>
+                            </div>
+                            <span class="country-iso-code">gb</span>
+                        </a>
+                        <a href="https://www.essens.md/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/md.png" alt="MD" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Moldova</span>
+                            </div>
+                            <span class="country-iso-code">md</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/nl.png" alt="NL" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Olanda</span>
+                            </div>
+                            <span class="country-iso-code">nl</span>
+                        </a>
+                        <a href="https://www.essensworld.pl/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/pl.png" alt="PL" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Polonia</span>
+                            </div>
+                            <span class="country-iso-code">pl</span>
+                        </a>
+                        <a href="https://www.essenseurope.com/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ro.png" alt="RO" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">România</span>
+                            </div>
+                            <span class="country-iso-code">ro</span>
+                        </a>
+                        <a href="https://www.essensworld.ru/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ru.png" alt="RU" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Rusia</span>
+                            </div>
+                            <span class="country-iso-code">ru</span>
+                        </a>
+                        <a href="https://www.essensworld.sn/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/sn.png" alt="SN" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Senegal</span>
+                            </div>
+                            <span class="country-iso-code">sn</span>
+                        </a>
+                        <a href="https://www.essens.rs/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/rs.png" alt="RS" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Serbia</span>
+                            </div>
+                            <span class="country-iso-code">rs</span>
+                        </a>
+                        <a href="https://www.essens.sk/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/sk.png" alt="SK" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Slovacia</span>
+                            </div>
+                            <span class="country-iso-code">sk</span>
+                        </a>
+                        <a href="https://www.essens.si/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/si.png" alt="SI" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Slovenia</span>
+                            </div>
+                            <span class="country-iso-code">si</span>
+                        </a>
+                        <a href="https://www.essensworld.es/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/es.png" alt="ES" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Spania</span>
+                            </div>
+                            <span class="country-iso-code">es</span>
+                        </a>
+                        <a href="https://www.essensworld.se/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/se.png" alt="SE" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Suedia</span>
+                            </div>
+                            <span class="country-iso-code">se</span>
+                        </a>
+                        <a href="https://www.essens.hu/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/hu.png" alt="HU" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Ungaria</span>
+                            </div>
+                            <span class="country-iso-code">hu</span>
+                        </a>
+                        <a href="https://www.essensworld.uz/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/uz.png" alt="UZ" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Uzbekistan</span>
+                            </div>
+                            <span class="country-iso-code">uz</span>
+                        </a>
+                        <a href="https://www.essens.ua/r-830000081" target="_blank" class="country-bubble">
+                            <div class="country-left-info">
+                                <div class="flag-holder"><img src="https://flagcdn.com/w40/ua.png" alt="UA" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <span class="country-name">Ucraina</span>
+                            </div>
+                            <span class="country-iso-code">ua</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- CARDURI LINK DE JOS: MAGAZIN PREȚ ÎNTREG -->
         <a href="https://my.essens.com/830000081" target="_blank" style="text-decoration: none; display: block;">
             <div class="card" style="grid-template-rows: auto; margin-top: 25px;">
-                <!-- Notification Bubble Actualizat -->
                 <div class="app-badge alt">Preț Întreg</div>
-                
+
                 <div class="card-header">
                     <div class="card-title-block">
                         <div class="card-icon-container">
-                            <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="none" stroke="#b2a4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="none" stroke="#b2a4bf"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="9" cy="21" r="1"></circle>
                                 <circle cx="20" cy="21" r="1"></circle>
                                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -887,33 +1326,40 @@
                         </div>
                         <div class="card-text-holder">
                             <h3>Magazin Online Essens</h3>
-                            <p class="sub-label" style="color: #7a6e85; font-weight: 400;">Comandă rapid, direct la tine acasă</p>
+                            <p class="sub-label" style="color: #7a6e85; font-weight: 400;">Comandă rapid, direct la tine
+                                acasă</p>
                         </div>
                     </div>
                     <div class="arrow-container" style="transform: rotate(-90deg); color: #b2a4bf;">
-                        <svg class="svg-icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        <svg class="svg-icon" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                     </div>
                 </div>
             </div>
         </a>
 
-        <!-- MODULUL ASISTENȚĂ -->
         <div class="support-section">
             <p>Ai întrebări? Scrie-mi direct:</p>
-            
+
             <div class="split-chat-button">
-                <a href="https://wa.me/37378020655?text=Bun%C4%83!%20Am%20nevoie%20de%20ajutor%20cu%20platforma%20ESSENS." target="_blank" class="chat-half chat-whatsapp">
+                <a href="https://wa.me/37378020655?text=Bun%C4%83!%20Am%20nevoie%20de%20ajutor%20cu%20platforma%20ESSENS."
+                    target="_blank" class="chat-half chat-whatsapp">
                     <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: currentColor;">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                        </path>
                     </svg>
                     <span>WhatsApp</span>
                 </a>
-                
+
                 <div class="split-divider"></div>
-                
+
                 <a href="https://m.me//Ludmila.Stepan.3" target="_blank" class="chat-half chat-messenger">
                     <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: currentColor;">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                        </path>
                     </svg>
                     <span>Messenger</span>
                 </a>
@@ -922,23 +1368,93 @@
 
     </div>
 
-    <!-- SUBȘOL COPYRIGHT -->
     <footer class="custom-footer">
         <p class="footer-text">
-            &copy; 2026 Toate drepturile rezervate.<br>
+            © 2026 Toate drepturile rezervate.<br>
             Creat și gestionat de <span class="footer-brand">Stepan Ludmila</span>.
         </p>
     </footer>
 
-    <!-- LOGICA JAVASCRIPT -->
     <script>
+        // Obiect de mapare cod țară -> link înregistrare oficial
+        const countryLinks = {
+            'AT': 'https://www.essens.at/r-830000081',
+            'BE': 'https://www.essensworld.be/r-830000081',
+            'BA': 'https://www.essens.ba/r-830000081',
+            'BG': 'https://www.essenseurope.com/r-830000081',
+            'CZ': 'https://www.essens.cz/r-830000081',
+            'CY': 'https://www.essens.com.cy/r-830000081',
+            'DK': 'https://www.essenseurope.com/r-830000081',
+            'EE': 'https://www.essenseurope.ee/r-830000081',
+            'FR': 'https://www.essensworld.fr/r-830000081',
+            'FI': 'https://www.essenseurope.com/r-830000081',
+            'DE': 'https://www.essensworld.de/r-830000081',
+            'GR': 'https://www.essens.gr/r-830000081',
+            'IT': 'https://www.essens.it/r-830000081',
+            'IE': 'https://www.essens.ie/r-830000081',
+            'KZ': 'https://www.essensworld.kz/r-830000081',
+            'LV': 'https://www.essenseurope.lv/r-830000081',
+            'LT': 'https://www.essens.lt/r-830000081',
+            'LU': 'https://www.essenseurope.com/r-830000081',
+            'GB': 'https://www.essens.co.uk/r-830000081',
+            'MD': 'https://www.essens.md/r-830000081',
+            'NL': 'https://www.essenseurope.com/r-830000081',
+            'PL': 'https://www.essensworld.pl/r-830000081',
+            'RO': 'https://www.essenseurope.com/r-830000081',
+            'RU': 'https://www.essensworld.ru/r-830000081',
+            'SN': 'https://www.essensworld.sn/r-830000081',
+            'RS': 'https://www.essens.rs/r-830000081',
+            'SK': 'https://www.essens.sk/r-830000081',
+            'SI': 'https://www.essens.si/r-830000081',
+            'ES': 'https://www.essensworld.es/r-830000081',
+            'SE': 'https://www.essensworld.se/r-830000081',
+            'HU': 'https://www.essens.hu/r-830000081',
+            'UZ': 'https://www.essensworld.uz/r-830000081',
+            'UA': 'https://www.essens.ua/r-830000081'
+        };
+
+        // Funcția de detecție IP/Țară asincronă cu injectare imagine în Ribbon
+        async function detectCountryAndSetLink() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                if (!response.ok) return;
+                
+                const data = await response.json();
+                const countryCode = data.country_code; // Întoarce ex: 'RO', 'IT', 'MD'
+                
+                if (countryCode && countryLinks[countryCode]) {
+                    const targetLink = countryLinks[countryCode];
+                    const partnerBtn = document.getElementById('mainPartnerBtn');
+                    
+                    if (partnerBtn) {
+                        // Actualizăm link-ul de redirecționare globală
+                        partnerBtn.setAttribute('href', targetLink);
+                        
+                        // Înlocuim dinamic imaginea de fundal a panglicii cu steagul oficial HD vectorizat
+                        const ribbonFlag = document.getElementById('btnRibbonFlag');
+                        if (ribbonFlag) {
+                            const flagUrl = `https://flagcdn.com/w80/${countryCode.toLowerCase()}.png`;
+                            ribbonFlag.style.backgroundImage = `url('${flagUrl}')`;
+                        }
+                        
+                        console.log(`[GeoIP] Locație stabilită: ${countryCode}. Ribbon reactualizat.`);
+                    }
+                }
+            } catch (error) {
+                console.warn('[GeoIP] Eroare detecție. Rămâne configurarea de bază (MD).', error);
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            // Rulăm algoritmul asincron GeoIP
+            detectCountryAndSetLink();
+
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
-            
+
             let percentage = 0;
-            const totalTime = 2500; 
-            const intervalTime = 25; 
+            const totalTime = 2500;
+            const intervalTime = 25;
             const increment = 100 / (totalTime / intervalTime);
 
             const timer = setInterval(() => {
@@ -946,17 +1462,42 @@
                 if (percentage >= 100) {
                     percentage = 100;
                     clearInterval(timer);
-                    
+
                     setTimeout(() => {
                         document.body.classList.remove('loading');
                         document.body.classList.add('scrolled');
                     }, 200);
                 }
-                
+
                 progressBar.style.width = `${Math.floor(percentage)}%`;
                 progressText.innerText = `Se încarcă ${Math.floor(percentage)}%`;
             }, intervalTime);
         });
+        
+        // Căutare inteligentă extinsă: Caută după Nume sau după Codul ISO (ex: "ro")
+        function filterCountries() {
+            const input = document.getElementById('countrySearch');
+            const filter = input.value.toLowerCase().trim();
+            const grid = document.getElementById('countriesGrid');
+            const bubbles = grid.getElementsByClassName('country-bubble');
+
+            for (let i = 0; i < bubbles.length; i++) {
+                const countryNameEl = bubbles[i].getElementsByClassName('country-name')[0];
+                const countryIsoEl = bubbles[i].getElementsByClassName('country-iso-code')[0];
+                
+                if (countryNameEl && countryIsoEl) {
+                    const nameText = countryNameEl.textContent.toLowerCase();
+                    const isoText = countryIsoEl.textContent.toLowerCase();
+                    
+                    // Condiție: dacă textul căutat se află fie în nume, fie în codul ISO
+                    if (nameText.indexOf(filter) > -1 || isoText.indexOf(filter) > -1) {
+                        bubbles[i].style.display = "";
+                    } else {
+                        bubbles[i].style.display = "none";
+                    }
+                }
+            }
+        }
 
         function toggleCard(cardElement) {
             if (cardElement.parentElement.tagName === 'A') return;
@@ -968,4 +1509,5 @@
         }
     </script>
 </body>
+
 </html>
