@@ -15,7 +15,7 @@
     <meta property="og:title" content="ESSENS Partner Hub">
     <meta property="og:description"
         content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
-    <meta property="og:image" content="https://myessens.github.io/hub/logo_300x300.png">
+    <meta property="og:image" content="https://myessens.github.io/hub/logo_purple.png">
     <meta property="og:site_name" content="ESSENS Partner Hub">
     <meta property="og:locale" content="ro_RO">
 
@@ -23,12 +23,18 @@
     <meta name="twitter:title" content="ESSENS Partner Hub">
     <meta name="twitter:description"
         content="Platforma oficială creată pentru accesul rapid la ghiduri esențiale, înregistrări directe și oferte exclusive.">
-    <meta name="twitter:image" content="https://myessens.github.io/hub/logo_300x300.png">
+    <meta name="twitter:image" content="https://myessens.github.io/hub/logo_purple.png">
 
     <script defer src="https://cloud.umami.is/script.js"
         data-website-id="2bb99776-312e-4518-8df2-f5f21eb3b726"></script>
 
-    <link rel="icon" type="image/x-icon" href="logo_300x300.png">
+    <link rel="icon" type="image/png" href="logo_purple.png">
+    <link rel="icon" type="image/png" sizes="300x300" href="logo_purple.png">
+    <link rel="apple-touch-icon" href="logo_purple.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Dancing+Script:wght@600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. STILURI GENERALE ȘI RESET --- */
@@ -40,6 +46,26 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        button {
+            border: none;
+            background: none;
+            font: inherit;
+            color: inherit;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
         body {
             background-color: #fcfaff;
             color: #2d2638;
@@ -47,11 +73,32 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
         }
 
         body.loading {
             overflow: hidden;
             height: 100vh;
+        }
+
+        .scroll-progress-bar {
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #8a4fff, #ff5e9c, #0072ff);
+            background-size: 200% 100%;
+            z-index: 9;
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 8px rgba(138, 79, 255, 0.5);
+            transition: width 0.08s linear;
+            pointer-events: none;
         }
 
         /* --- 2. ECRANUL HERO MINIMALIST --- */
@@ -73,15 +120,111 @@
         }
 
         .welcome-title {
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 700;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s forwards 0.2s;
             color: #1a1124;
             display: flex;
             align-items: center;
             gap: 12px;
+            perspective: 600px;
+        }
+
+        .welcome-text {
+            font-family: 'Fredoka', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            opacity: 0;
+            display: inline-block;
+            background: linear-gradient(90deg, #8a4fff, #ff5e9c, #0072ff, #8a4fff);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation:
+                welcomeBounceIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.15s,
+                welcomeGradientFlow 3.5s linear infinite 0.9s;
+        }
+
+        .welcome-title .heart-svg {
+            opacity: 0;
+            transform-origin: center;
+            animation:
+                welcomePopIn 0.6s cubic-bezier(0.34, 1.8, 0.64, 1) forwards 0.55s,
+                heartBeat 1.4s ease-in-out infinite 1.2s;
+        }
+
+        @keyframes welcomeBounceIn {
+            0% {
+                opacity: 0;
+                transform: translateY(28px) scale(0.6) rotate(-6deg);
+                filter: blur(6px);
+            }
+
+            55% {
+                opacity: 1;
+                transform: translateY(-6px) scale(1.08) rotate(2deg);
+                filter: blur(0);
+            }
+
+            75% {
+                transform: translateY(2px) scale(0.98) rotate(-1deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes welcomeGradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 300% 50%;
+            }
+        }
+
+        @keyframes welcomePopIn {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-25deg);
+            }
+
+            60% {
+                opacity: 1;
+                transform: scale(1.35) rotate(8deg);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes heartBeat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.25);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.18);
+            }
+
+            60% {
+                transform: scale(1);
+            }
         }
 
         .loader-container {
@@ -115,6 +258,68 @@
             color: #8a4fff;
             margin-top: 10px;
             letter-spacing: 0.5px;
+        }
+
+        /* Particulele care "zboară" din zona logo-ului la finalul încărcării. */
+        .loading-burst {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            overflow: visible;
+        }
+
+        .loading-burst-particle {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            font-size: 1.25rem;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.4);
+            animation: burstFly 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: var(--delay, 0s);
+            will-change: transform, opacity;
+        }
+
+        @keyframes burstFly {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3) rotate(0deg);
+            }
+
+            18% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1.15) rotate(170deg);
+            }
+        }
+
+        /* Un pic de "putere" în plus în chiar clipa comutării: logo-ul/loader-ul
+           se extinde ușor și se estompează cu blur înainte ca ecranul principal
+           să preia scena, ca tranziția să nu fie un simplu tăiat brusc. */
+        body.is-transitioning .hero-section {
+            filter: blur(2px);
+        }
+
+        body.is-transitioning .welcome-title {
+            animation: heroTransitionPulse 0.7s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+
+        @keyframes heroTransitionPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(1.06);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         body.scrolled .hero-section {
@@ -200,6 +405,51 @@
             line-height: 1.55;
         }
 
+        .signature-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .signature-line {
+            flex: 1;
+            max-width: 46px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(138, 79, 255, 0.5));
+        }
+
+        .signature-line.reverse {
+            background: linear-gradient(90deg, rgba(255, 94, 156, 0.5), transparent);
+        }
+
+        .signature-text {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+            font-size: 2.5rem;
+            line-height: 1;
+            white-space: nowrap;
+            background: linear-gradient(120deg, #ff5e9c, #8a4fff 65%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #8a4fff;
+            padding-bottom: 6px;
+        }
+
+        .signature-sparkle {
+            width: 15px;
+            height: 15px;
+            fill: #ffd07a;
+            filter: drop-shadow(0 1px 3px rgba(255, 180, 90, 0.45));
+            transform: translateY(-14px);
+        }
+
         /* --- CARDURI --- */
         .card {
             position: relative;
@@ -226,7 +476,7 @@
         .app-badge {
             position: absolute;
             top: -6px;
-            right: 12px;
+            right: 20px;
             background-color: #8a4fff;
             color: white;
             font-size: 0.68rem;
@@ -256,6 +506,14 @@
             align-items: center;
             gap: 12px;
             min-width: 0;
+        }
+
+        /* Cand sageata e aliniata cu randul de titlu (.align-top, pt. carduri cu
+           descriere), aliniem si iconița la fel, ca sa nu mai para "impinsa" in
+           alta pozitie fata de sageata. Clasa explicita (nu :has()) pentru
+           compatibilitate maxima pe telefon. */
+        .card-title-block.icon-align-top {
+            align-items: flex-start;
         }
 
         .card-text-holder {
@@ -329,6 +587,17 @@
         .card.active .arrow-container {
             transform: rotate(180deg);
             color: #8a4fff;
+        }
+
+        /* Cand titlul cardului are si un sub-label (2 randuri), sageata se aliniaza
+           cu randul de titlu, la fel ca la cardurile cu un singur rand. */
+        .arrow-container.align-top {
+            align-self: flex-start;
+            margin-top: 4px;
+        }
+
+        .card.active .arrow-container.align-top {
+            margin-top: 4px;
         }
 
         .info-callout-box {
@@ -786,10 +1055,1074 @@
                 opacity: 1;
             }
         }
-    </style>
+            /* ============================================================
+           10. CARD ÎN PAGINĂ — DESCOPERĂ PRODUSE (stil feed video)
+        ============================================================ */
+        .discover-hero-card {
+            position: relative;
+            isolation: isolate;
+        }
+
+        .discover-sheen-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: inherit;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .discover-sheen-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-20deg);
+            animation: discoverSheen 3.6s ease-in-out infinite;
+        }
+
+        .discover-hero-card .card-header {
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes discoverSheen {
+            0% {
+                left: -75%;
+            }
+
+            45%,
+            100% {
+                left: 130%;
+            }
+        }
+
+        .app-badge.discover-badge-pop {
+            background-color: #ff3b3b;
+            box-shadow: 0 2px 8px rgba(255, 59, 59, 0.35);
+            animation: discoverBadgePop 1.8s ease-in-out infinite;
+        }
+
+        @keyframes discoverBadgePop {
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: hue-rotate(0deg);
+                box-shadow: 0 2px 8px rgba(255, 59, 59, 0.35);
+            }
+
+            25% {
+                filter: hue-rotate(-12deg);
+            }
+
+            50% {
+                transform: scale(1.12);
+                filter: hue-rotate(18deg);
+                box-shadow: 0 2px 16px rgba(255, 59, 59, 0.65);
+            }
+
+            75% {
+                filter: hue-rotate(-6deg);
+            }
+        }
+
+        /* ============================================================
+           11. DESCOPERĂ PRODUSE — FEED FULLSCREEN TIP REELS
+        ============================================================ */
+        .discover-overlay {
+            position: fixed;
+            inset: 0;
+            background: #000000;
+            z-index: 900;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0.35s;
+        }
+
+        .discover-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1), visibility 0s linear 0s;
+        }
+
+        .discover-frame {
+            width: 100%;
+            max-width: 460px;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            background: #000;
+            transform: scale(0.97);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+        }
+
+        .discover-overlay.open .discover-frame {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Header fix: sageata inapoi (stanga) + titlu "For You" centrat.
+           --topbar-h e folosit mai jos ca sa aliniem dots-urile si butonul
+           de sunet exact sub acest header, fara suprapuneri. */
+        .discover-frame {
+            --topbar-h: 56px;
+        }
+
+        .discover-topbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 35;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: max(14px, env(safe-area-inset-top)) 14px 10px 14px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
+            pointer-events: none;
+        }
+
+        .discover-back-btn {
+            pointer-events: auto;
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .discover-back-btn:active {
+            transform: scale(0.86);
+        }
+
+        .discover-back-btn svg {
+            width: 22px;
+            height: 22px;
+            stroke: #ffffff;
+            stroke-width: 2.2;
+            fill: none;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+        }
+
+        .discover-topbar-title {
+            flex: 1;
+            text-align: center;
+            font-family: 'Cinzel Decorative', 'Dancing Script', serif;
+            font-weight: 700;
+            font-size: 1.02rem;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ffffff 0%, #ffffff 40%, #ffe6f2 50%, #ffffff 60%, #ffffff 100%);
+            background-size: 220% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: topbarTitleShine 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.75)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.4));
+        }
+
+        .discover-topbar-title::before,
+        .discover-topbar-title::after {
+            content: '✦';
+            display: inline-block;
+            font-family: initial;
+            font-size: 0.6em;
+            vertical-align: middle;
+            opacity: 0.85;
+            margin: 0 5px;
+        }
+
+        @keyframes topbarTitleShine {
+            0% {
+                background-position: 220% 0;
+            }
+
+            60%,
+            100% {
+                background-position: -20% 0;
+            }
+        }
+
+        .discover-topbar-spacer {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+        }
+
+        .discover-feed {
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
+        }
+
+        .discover-feed::-webkit-scrollbar {
+            display: none;
+        }
+
+        .reel-slide {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .reel-media-wrap {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            touch-action: pan-y;
+            transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reel-media-wrap.is-dragging {
+            transition: none;
+        }
+
+        .reel-media {
+            position: relative;
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+        }
+
+        .reel-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reel-media img.img-broken {
+            display: none;
+        }
+
+        .reel-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #000;
+            pointer-events: none;
+        }
+
+        .reel-media video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .reel-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reel-mute-btn {
+            position: absolute;
+            top: max(14px, env(safe-area-inset-top));
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 6;
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .reel-mute-btn:active {
+            transform: scale(0.86);
+        }
+
+        .reel-mute-btn svg {
+            width: 21px;
+            height: 21px;
+            fill: #ffffff;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+        }
+
+        /* --- Prompt central de activare sunet (stil TikTok) --- */
+        .sound-prompt {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 70;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 26px;
+            border-radius: 22px;
+            background: rgba(20, 18, 26, 0.5);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
+        }
+
+        .sound-prompt.show {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            animation: soundPromptPulse 1.8s ease-in-out infinite;
+        }
+
+        .sound-prompt-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sound-prompt-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #ffffff;
+        }
+
+        .sound-prompt span {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.1px;
+            white-space: nowrap;
+        }
+
+        @keyframes soundPromptPulse {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        .reel-pause-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 6;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .reel-pause-icon.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .reel-pause-icon svg {
+            width: 26px;
+            height: 26px;
+            fill: #ffffff;
+            margin-left: 2px;
+        }
+
+        /* --- Ecranul de final de sesiune ("zid") ---------------------------
+           Apare după ~9-10 clipuri vizionate într-o singură intrare în feed,
+           ca să limităm consumul de bandwidth. În loc de o oprire bruscă/goală,
+           arătăm în fundal (blurat, ca un "teaser") chiar următorul clip care
+           te-ar aștepta data viitoare — impresia e că feed-ul continuă să
+           trăiască, doar că e "încețoșat" de un cărucior prietenos care
+           blochează temporar drumul, nu de un perete gol. */
+        .reel-end-wall {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+        }
+
+        .reel-end-preview {
+            position: absolute;
+            inset: -6%;
+            width: 112%;
+            height: 112%;
+            object-fit: cover;
+            filter: blur(34px) saturate(125%) brightness(0.5);
+            transform: scale(1.08);
+        }
+
+        .reel-end-bg {
+            position: absolute;
+            inset: -10%;
+            background:
+                radial-gradient(circle at 22% 20%, rgba(138, 79, 255, 0.55), transparent 55%),
+                radial-gradient(circle at 84% 16%, rgba(255, 94, 156, 0.45), transparent 50%),
+                radial-gradient(circle at 50% 92%, rgba(0, 114, 255, 0.45), transparent 55%);
+            mix-blend-mode: soft-light;
+        }
+
+        .reel-end-scrim {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 6, 20, 0.55) 0%, rgba(10, 6, 20, 0.72) 55%, rgba(10, 6, 20, 0.86) 100%);
+        }
+
+        .reel-end-content {
+            position: relative;
+            z-index: 2;
+            max-width: 300px;
+            padding: 30px 26px 26px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 28px;
+            backdrop-filter: blur(18px) saturate(140%);
+            -webkit-backdrop-filter: blur(18px) saturate(140%);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: endCardPopIn 0.55s cubic-bezier(0.25, 1, 0.5, 1) both;
+        }
+
+        @keyframes endCardPopIn {
+            0% {
+                opacity: 0;
+                transform: translateY(18px) scale(0.94);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .reel-end-icon {
+            position: relative;
+            width: 82px;
+            height: 82px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reel-end-emoji {
+            font-size: 2.7rem;
+            line-height: 1;
+            filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.4));
+            animation: endEmojiFloat 2.4s ease-in-out infinite;
+        }
+
+        .reel-end-cart {
+            position: absolute;
+            bottom: -6px;
+            right: -10px;
+            font-size: 1.5rem;
+            animation: endCartWiggle 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        @keyframes endEmojiFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-4deg);
+            }
+
+            50% {
+                transform: translateY(-9px) rotate(4deg);
+            }
+        }
+
+        @keyframes endCartWiggle {
+
+            0%,
+            100% {
+                transform: rotate(-8deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(10deg) scale(1.08);
+            }
+        }
+
+        .reel-end-title {
+            color: #ffffff;
+            font-size: 1.22rem;
+            font-weight: 800;
+            line-height: 1.32;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            margin: 0 0 10px;
+        }
+
+        .reel-end-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.92rem;
+            line-height: 1.55;
+            margin: 0 0 24px;
+        }
+
+        .reel-end-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 15px 26px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(90deg, #8a4fff, #ff5e9c, #0072ff);
+            background-size: 200% 100%;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 10px 24px rgba(138, 79, 255, 0.45);
+            transition: transform 0.15s ease, background-position 0.6s ease;
+            animation: endBtnShine 3s ease-in-out infinite;
+        }
+
+        @keyframes endBtnShine {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .reel-end-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            flex-shrink: 0;
+        }
+
+        .reel-end-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Fara gradient in starea de repaus a clipului, pentru un afisaj cat
+           mai clean — numele/descrierea scurta stau pe text-shadow propriu.
+           Gradientul de jos apare doar cand utilizatorul apasa "Citeste mai
+           mult", cu o animatie de fade + extindere pe inaltime, ca textul
+           suplimentar sa ramana lizibil peste orice fotografie. */
+        .reel-scrim-base {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 30%;
+            opacity: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.28) 55%, rgba(0, 0, 0, 0.62) 100%);
+            pointer-events: none;
+            z-index: 6;
+            transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+        }
+
+        .reel-scrim-expand {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 30%;
+            opacity: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.38) 38%, rgba(0, 0, 0, 0.88) 100%);
+            pointer-events: none;
+            z-index: 6;
+            transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+        }
+
+        .reel-slide.desc-open .reel-scrim-base {
+            height: 40%;
+            opacity: 1;
+        }
+
+        .reel-slide.desc-open .reel-scrim-expand {
+            height: 66%;
+            opacity: 1;
+        }
+
+        .reel-dots {
+            position: absolute;
+            top: calc(max(14px, env(safe-area-inset-top)) + var(--topbar-h, 56px));
+            left: 14px;
+            right: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            z-index: 25;
+            pointer-events: none;
+        }
+
+        .reel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.45);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .reel-dot.is-active {
+            background: #ffffff;
+            transform: scale(1.35);
+        }
+
+        .reel-actions {
+            position: absolute;
+            right: 14px;
+            bottom: 104px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            z-index: 25;
+        }
+
+        .reel-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: #ffffff;
+        }
+
+        .reel-action-btn {
+            width: 28px;
+            height: 28px;
+            background: none;
+            border: none;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .reel-action-btn:active {
+            transform: scale(0.86);
+            transition: transform 0.1s ease;
+        }
+
+        .reel-action-btn svg {
+            width: 27px;
+            height: 27px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 1.8;
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55)) drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+        }
+
+        .reel-action.is-save .reel-action-btn svg {
+            transition: fill 0.2s cubic-bezier(0.25, 1, 0.5, 1), stroke 0.2s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
+        }
+
+        .reel-action.is-save.is-saved .reel-action-btn svg {
+            fill: #ff2d55;
+            stroke: #ff2d55;
+            transform: scale(1.12);
+        }
+
+        .reel-action span {
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+            width: 68px;
+            line-height: 1.2;
+        }
+
+        .reel-action.is-partner {
+            position: relative;
+        }
+
+        .reel-action.is-partner .reel-action-btn {
+            position: relative;
+        }
+
+        .reel-partner-discount-badge {
+            position: absolute;
+            top: -9px;
+            right: -14px;
+            width: auto;
+            background: linear-gradient(135deg, #8a4fff, #ff5e9c);
+            color: #ffffff;
+            font-size: 0.56rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            line-height: 1;
+            padding: 3px 6px;
+            border-radius: 999px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(28, 20, 40, 0.9);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 2;
+            animation: partnerBadgePulse 2.2s ease-in-out infinite;
+        }
+
+        .reel-action.is-partner .reel-partner-discount-badge {
+            width: auto;
+            text-align: center;
+        }
+
+        @keyframes partnerBadgePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .reel-music-disc {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 36% 32%, rgba(255, 255, 255, 0.4), transparent 40%),
+                repeating-radial-gradient(circle at center, #0a0a0a 0px, #0a0a0a 2px, #262626 2px, #262626 4px),
+                radial-gradient(circle at center, #ffd98a 0 15%, #050505 17% 100%);
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+            animation: spin 3.6s linear infinite;
+            animation-play-state: paused;
+            margin-top: 2px;
+        }
+
+        .reel-slide.is-active .reel-music-disc.is-playing {
+            animation-play-state: running;
+        }
+
+        .reel-info {
+            position: absolute;
+            left: 16px;
+            right: 84px;
+            bottom: 18px;
+            z-index: 25;
+            color: #ffffff;
+        }
+
+        .reel-name {
+            font-size: 1.32rem;
+            font-weight: 800;
+            margin-bottom: 2px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 4px 14px rgba(0, 0, 0, 0.45);
+            letter-spacing: -0.2px;
+        }
+
+        .reel-name-sub {
+            font-size: 0.78rem;
+            font-weight: 600;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.78);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            margin-bottom: 7px;
+            letter-spacing: 0.1px;
+        }
+
+        /* Gama/colecția (ex: "Must Have Edition") — numele produsului rămâne
+           protagonist, iar gama apare dedesubt, cu text mai mic, ca un tag. */
+        .reel-name-gama {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(90deg, rgba(138, 79, 255, 0.65), rgba(255, 94, 156, 0.55));
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin: 2px 0 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Card "liquid glass" pentru clipurile promoționale/tutoriale -------
+           Înlocuiește complet numele + descrierea unui produs, ca să fie limpede
+           dintr-o privire că respectivul clip e conținut de brand/ghid, nu fișa
+           unui produs anume. */
+        .reel-ad-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px 8px 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.07));
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+        }
+
+        .reel-ad-badge-logo {
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffffff, #f3ecff);
+            color: #7b3ff2;
+            font-family: 'Cinzel Decorative', serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .reel-ad-badge-logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .reel-ad-badge-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            text-align: left;
+        }
+
+        .reel-ad-badge-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.86rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .reel-ad-badge-check {
+            width: 15px;
+            height: 15px;
+            flex-shrink: 0;
+        }
+
+        .reel-ad-badge-tag {
+            font-size: 0.66rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        .reel-detail-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 2px;
+        }
+
+        .reel-detail-chip {
+            font-size: 0.66rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 3px 9px;
+            border-radius: 20px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+            white-space: nowrap;
+        }
+
+        .reel-desc-short-wrap {
+            position: relative;
+        }
+
+        .reel-desc-short-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.94);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+        }
+
+        .reel-desc.expanded .reel-desc-short-text {
+            -webkit-line-clamp: 999;
+            -webkit-mask-image: none;
+            mask-image: none;
+        }
+
+        .reel-desc-toggle {
+            display: inline-block;
+            margin-top: 6px;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 0;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: rgba(255, 255, 255, 0.4);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: opacity 0.15s ease;
+        }
+
+        .reel-desc-toggle:active {
+            opacity: 0.55;
+        }
+
+        /* --- Descriere extinsă inline (stil TikTok, monocrom alb, fără sheet separat) --- */
+        .reel-desc-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .reel-desc.expanded .reel-desc-body {
+            grid-template-rows: 1fr;
+        }
+
+        .reel-desc-body-inner {
+            overflow: hidden;
+        }
+
+        .reel-desc-full {
+            padding: 8px 0 2px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease 0.08s, transform 0.35s ease 0.08s;
+        }
+
+        .reel-desc.expanded .reel-desc-full {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reel-note-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .reel-note-tag {
+            flex-shrink: 0;
+            width: 58px;
+            font-size: 0.64rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            padding-top: 2px;
+        }
+
+        .reel-note-text {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .reel-desc-extra {
+            font-size: 0.82rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.28);
+        }
+
+        .reel-toast {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            transform: translate(-50%, 10px);
+            background: rgba(255, 255, 255, 0.94);
+            color: #2d2638;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 9px 16px;
+            border-radius: 30px;
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            white-space: nowrap;
+        }
+
+        .reel-toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+</style>
 </head>
 
 <body class="loading">
+
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 
     <svg width="0" height="0" style="position:absolute">
         <defs>
@@ -813,12 +2146,16 @@
                 <stop offset="0%" stop-color="#00c6ff" />
                 <stop offset="100%" stop-color="#0072ff" />
             </linearGradient>
+            <linearGradient id="reelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff5e9c" />
+                <stop offset="100%" stop-color="#8a4fff" />
+            </linearGradient>
         </defs>
     </svg>
 
     <div class="hero-section" id="hero">
         <h1 class="welcome-title">
-            <span>Bine ai venit</span>
+            <span class="welcome-text">Bine ai venit</span>
             <svg class="heart-svg" viewBox="0 0 24 24">
                 <path
                     d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -841,6 +2178,11 @@
         </div>
 
         <div class="intro-box">
+            <div class="signature-name">
+                <span class="signature-line"></span>
+                <span class="signature-text">Ludmila<svg class="signature-sparkle" viewBox="0 0 24 24"><path d="M12 2l1.8 5.7L19 9l-5.2 1.3L12 16l-1.8-5.7L5 9l5.2-1.3L12 2z"></path></svg></span>
+                <span class="signature-line reverse"></span>
+            </div>
             <p>
                 Am adunat aici tot ce ține de compania în care activez și mă dezvolt, ca să fie simplu și ușor de
                 accesat pentru tine. Indiferent dacă îți dorești produse premium sau vrei să afli cum poți face parte
@@ -881,7 +2223,7 @@
             <div class="app-badge">Reduceri</div>
 
             <div class="card-header">
-                <div class="card-title-block">
+                <div class="card-title-block icon-align-top">
                     <div class="card-icon-container">
                         <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#guideGradient)">
                             <path
@@ -890,11 +2232,11 @@
                     </div>
                     <div class="card-text-holder">
                         <h3>Devino Partener ESSENS</h3>
-                        <p class="sub-label" style="color: #8a4fff; font-weight: 500;">Economisește inteligent și crește
+                        <p class="sub-label" style="color: #8a4fff; font-weight: 350;">Economisește inteligent și crește
                             în ritmul tău</p>
                     </div>
                 </div>
-                <div class="arrow-container">
+                <div class="arrow-container align-top">
                     <svg class="svg-icon" viewBox="0 0 24 24">
                         <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
@@ -1310,6 +2652,32 @@
             </div>
         </div>
 
+        <div class="card discover-hero-card" style="grid-template-rows: auto;" onclick="openDiscover()" role="button" tabindex="0"
+            onkeydown="if(event.key==='Enter')openDiscover()">
+            <div class="discover-sheen-wrap"></div>
+            <div class="app-badge discover-badge-pop">Nou</div>
+            <div class="card-header">
+                <div class="card-title-block">
+                    <div class="card-icon-container">
+                        <svg class="emoji-style-svg" viewBox="0 0 24 24" fill="url(#reelGradient)">
+                            <path
+                                d="M4 5a2 2 0 0 1 2-2h9.17a2 2 0 0 1 1.42.59l3.83 3.83a2 2 0 0 1 .58 1.41V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5z" />
+                            <path d="M14.5 3v3.5a1 1 0 0 0 1 1H19" fill="#fcfaff" />
+                            <path d="M9.7 9.6v5.3l4.7-2.65z" fill="#ffffff" />
+                        </svg>
+                    </div>
+                    <div class="card-text-holder">
+                        <h3>Prezentarea Produselor</h3>
+                    </div>
+                </div>
+                <div class="arrow-container">
+                    <svg class="svg-icon" viewBox="0 0 24 24">
+                        <polyline points="9 6 15 12 9 18"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
         <a href="https://my.essens.com/830000081" target="_blank" style="text-decoration: none; display: block;">
             <div class="card" style="grid-template-rows: auto; margin-top: 25px;">
                 <div class="app-badge alt">Preț Întreg</div>
@@ -1375,6 +2743,29 @@
         </p>
     </footer>
 
+    <!-- DESCOPERĂ PRODUSE — OVERLAY FULLSCREEN -->
+    <div class="discover-overlay" id="discoverOverlay" aria-hidden="true">
+        <div class="discover-frame">
+            <div class="discover-topbar">
+                <button class="discover-back-btn" onclick="closeDiscover()" aria-label="Înapoi">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="discover-topbar-title">For You</div>
+                <div class="discover-topbar-spacer" aria-hidden="true"></div>
+            </div>
+            <div class="discover-feed" id="discoverFeed"></div>
+
+            <div class="sound-prompt" id="soundPrompt" onclick="unmuteSound(event)">
+                <div class="sound-prompt-icon" id="soundPromptIcon"></div>
+                <span>Atinge pentru sunet</span>
+            </div>
+
+        </div>
+    </div>
+
     <script>
         // Obiect de mapare cod țară -> link înregistrare oficial
         const countryLinks = {
@@ -1439,15 +2830,92 @@
                         
                         console.log(`[GeoIP] Locație stabilită: ${countryCode}. Ribbon reactualizat.`);
                     }
+
+                    // Actualizăm și butoanele de preț-partener din feedul „Descoperă Produse”
+                    document.querySelectorAll('.js-partner-link').forEach(el => {
+                        el.setAttribute('href', targetLink);
+                    });
                 }
             } catch (error) {
                 console.warn('[GeoIP] Eroare detecție. Rămâne configurarea de bază (MD).', error);
             }
         }
 
+        // Discul de lângă butoanele de acțiune se rotește doar cât timp
+        // videoclipul chiar rulează, și se oprește exact când e pe pauză.
+        // 'play'/'pause' nu fac bubble, așa că le prindem în faza de capture.
+        document.addEventListener('play', (e) => {
+            if (!e.target.classList || !e.target.classList.contains('reel-video')) return;
+            const slide = e.target.closest('.reel-slide');
+            const disc = slide && slide.querySelector('.reel-music-disc');
+            if (disc) disc.classList.add('is-playing');
+        }, true);
+
+        document.addEventListener('pause', (e) => {
+            if (!e.target.classList || !e.target.classList.contains('reel-video')) return;
+            const slide = e.target.closest('.reel-slide');
+            const disc = slide && slide.querySelector('.reel-music-disc');
+            if (disc) disc.classList.remove('is-playing');
+        }, true);
+
+        // --- Pauză automată când clientul iese din pagină (ex: apasă "Cumpără" și
+        // se deschide alt tab/aplicație) — evită un videoclip/sunet care rulează
+        // "din senin" în fundal și poate speria clientul la revenire. Videoclipul
+        // activ e reluat automat când revine pe pagină.
+        let wasPlayingBeforeHide = false;
+
+        function pauseActiveVideoForBackground() {
+            const activeSlide = document.querySelector('.reel-slide.is-active');
+            const video = activeSlide && activeSlide.querySelector('.reel-media.is-current video');
+            if (video && !video.paused) {
+                wasPlayingBeforeHide = true;
+                video.pause();
+            }
+        }
+
+        function resumeActiveVideoFromBackground() {
+            if (!wasPlayingBeforeHide) return;
+            wasPlayingBeforeHide = false;
+            const activeSlide = document.querySelector('.reel-slide.is-active');
+            if (activeSlide) playCurrentVideo(activeSlide, false);
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                pauseActiveVideoForBackground();
+            } else {
+                resumeActiveVideoFromBackground();
+            }
+        });
+
+        // Fallback pentru browsere/webview-uri care nu declanșează fiabil
+        // visibilitychange la deschiderea unui link în tab nou.
+        window.addEventListener('blur', pauseActiveVideoForBackground);
+        window.addEventListener('focus', resumeActiveVideoFromBackground);
+
+        // Butonul de back (fizic, gest sau al browser-ului) trebuie să scoată
+        // utilizatorul DOAR din ecranul de feed tip TikTok, nu de pe tot site-ul.
+        window.addEventListener('popstate', () => {
+            const overlay = document.getElementById('discoverOverlay');
+            if (overlay && overlay.classList.contains('open')) {
+                closeDiscover(true);
+            }
+        });
+
         window.addEventListener('DOMContentLoaded', () => {
             // Rulăm algoritmul asincron GeoIP
             detectCountryAndSetLink();
+
+            const scrollProgressBar = document.getElementById('scrollProgressBar');
+            function updateScrollProgress() {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
+                if (scrollProgressBar) scrollProgressBar.style.width = `${pct}%`;
+            }
+            window.addEventListener('scroll', updateScrollProgress, { passive: true });
+            window.addEventListener('resize', updateScrollProgress);
+            updateScrollProgress();
 
             const progressBar = document.getElementById('progressBar');
             const progressText = document.getElementById('progressText');
@@ -1464,8 +2932,11 @@
                     clearInterval(timer);
 
                     setTimeout(() => {
+                        fireLoadingTransitionBurst();
+                        document.body.classList.add('is-transitioning');
                         document.body.classList.remove('loading');
                         document.body.classList.add('scrolled');
+                        setTimeout(() => document.body.classList.remove('is-transitioning'), 900);
                     }, 200);
                 }
 
@@ -1473,6 +2944,31 @@
                 progressText.innerText = `Se încarcă ${Math.floor(percentage)}%`;
             }, intervalTime);
         });
+
+        // Micro-explozie de particule care "zboară" din zona logo-ului chiar în
+        // clipa în care ecranul de încărcare cedează locul paginii principale —
+        // dă senzația unei tranziții vii, nu doar un simplu fade/scroll.
+        function fireLoadingTransitionBurst() {
+            const container = document.querySelector('.hero-section');
+            if (!container) return;
+            const burst = document.createElement('div');
+            burst.className = 'loading-burst';
+            const glyphs = ['✨', '💫', '⭐️', '🌸', '💜', '🤍'];
+            const count = 14;
+            for (let i = 0; i < count; i++) {
+                const span = document.createElement('span');
+                span.className = 'loading-burst-particle';
+                span.textContent = glyphs[i % glyphs.length];
+                const angle = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+                const dist = 90 + Math.random() * 150;
+                span.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+                span.style.setProperty('--ty', `${Math.sin(angle) * dist - 40}px`);
+                span.style.setProperty('--delay', `${Math.random() * 0.12}s`);
+                burst.appendChild(span);
+            }
+            container.appendChild(burst);
+            setTimeout(() => burst.remove(), 1300);
+        }
         
         // Căutare inteligentă extinsă: Caută după Nume sau după Codul ISO (ex: "ro")
         function filterCountries() {
@@ -1507,6 +3003,1500 @@
             });
             cardElement.classList.toggle('active');
         }
+            /* ============================================================
+           DESCOPERĂ PRODUSE — date + logică feed tip reels
+        ============================================================ */
+        // Fiecare element din "images" poate fi:
+        //   - un link normal către o poză:  'https://.../poza.jpg'
+        //   - un videoclip curat (fără watermark/logo/butoane), ca obiect:
+        //       { video: 'https://.../clip.mp4' }
+        //     Linkul trebuie să fie către FIȘIERUL video propriu-zis (mp4), găzduit de tine
+        //     (ex: pus lângă poze, în același loc unde ții imaginile), nu un link tiktok.com.
+        //     Vezi explicația de mai jos despre cum obții acel fișier din TikTok.
+        const PRODUCTS = [
+            {
+                id: 'p1',
+                name: 'Parfum W204',
+                inspiredBy: 'Tiziana Terenzi · Cassiopea',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Parfum%20W%20204.mp4?tr=orig-true' }
+                ],
+                short: '🌸🖤 Fructat-floral cu aer de lux — aroma inspirată de Tiziana Terenzi Cassiopea, în sticluță simplă, la un preț total diferit.',
+                type: 'Apă de parfum',
+                occasion: 'Purtare zilnică',
+                notes: {
+                    top: 'Coacăze negre, lămâie, fructul pasiunii',
+                    heart: 'Trandafir, garoafă, lăcrămioară',
+                    base: 'Mosc, lemn de santal, boabe de tonka',
+                    extra: '✨ De ce îl iubești:<br>🍇 Prospețime fructată de la prima pulverizare<br>🌹 Inimă florală, delicată și feminină<br>🤍 Fond cald de mosc & santal, care rămâne pe piele<br>💧 20% esențe parfumate — longevitate ridicată<br>📦 50ml'
+                },
+                buyLink: 'https://my.essens.com/detail/402034/Parfum+pentru+femei+w204'
+            },
+            {
+                id: 'p2',
+                name: 'Parfum W913',
+                inspiredBy: "HAUTE · Devil's Intrigue",
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Parfum%20913.mp4?tr=orig-true' }
+                ],
+                short: "🍵🤎 Cald, catifelat, ușor răsfățat — aroma inspirată de HAUTE Devil's Intrigue. Pentru zilele în care vrei să strălucești discret.",
+                type: 'Apă de parfum',
+                occasion: 'Zi, birou, ieșiri',
+                notes: {
+                    extra: '✨ De ce îl iubești:<br>🍵 Moliciune de ceai + prospețime de grapefruit<br>🤎 Cașmir & vanilie catifelată în fundal<br>😌 Senzație de calm și căldură, toată ziua<br>💧 20% esențe parfumate — longevitate ridicată<br>📦 50ml'
+                },
+                buyLink: 'https://my.essens.com/detail/529989/Parfum-pentru-femei-W913-'
+            },
+            {
+                id: 'p3',
+                name: 'Parfum W914 · Passenger Princess',
+                inspiredBy: 'Parfums de Marly · Delina Exclusif',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Parfum%20914.mp4?tr=orig-true' }
+                ],
+                short: '👑✈️ Feminin, elegant, memorabil — aroma inspirată de Parfums de Marly Delina Exclusif. Nu trebuie să meriți un moment doar pentru tine, trebuie doar să știi că îl meriți.',
+                type: 'Apă de parfum',
+                occasion: 'Zilnic / călătorii',
+                notes: {
+                    top: 'Bergamotă, trandafir',
+                    heart: 'Iasomie, lemn de cedru',
+                    base: 'Mosc, lemn uscat',
+                    extra: '✨ De ce îl iubești:<br>🌹 Deschidere florală, proaspătă<br>🤍 Iasomie & cedru — inimă elegantă<br>🪵 Fond lemnos-muscat, sofisticat<br>💧 20% esențe parfumate — longevitate ridicată<br>📦 50ml'
+                },
+                buyLink: 'https://my.essens.com/detail/530777/Printesa+Călătoare'
+            },
+            {
+                id: 'p4',
+                name: 'Cremă de față cu protecție solară SPF50+',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Face%20Cream%20Sun%20Protextion.mp4?tr=orig-true' }
+                ],
+                short: '☀️🧴 Protecție solară + îngrijire anti-aging într-un singur pas — piele protejată, uniformă, fără urme albe.',
+                type: 'Protecție solară',
+                occasion: 'Vara / expunere la soare',
+                notes: {
+                    extra: '✨ Beneficii:<br>🛡️ Filtre UVA + UVB pe termen lung<br>🌾 Extract de argan (Arganyl®) + vitamina E<br>🍚 Pudră micronizată de orez — finisaj neted<br>💦 Rezistentă la apă, potrivită și pentru ten sensibil<br><br>📌 Cum se aplică: pe față, înainte de expunerea la soare, se reaplică pe parcursul zilei.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p5',
+                name: 'Pudră transparentă Second Skin',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Pudra%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🤍✨ Finisaj mat, catifelat, „piele a doua" — estompează porii și liniile fine, fixează machiajul pentru ore în șir.',
+                type: 'Machiaj — finisare',
+                occasion: 'Zilnic, peste machiaj',
+                notes: {
+                    extra: '✨ Beneficii:<br>🎯 Microsfere ultra-fine — unifică tenul<br>🌫️ Finisaj mat, aspect natural<br>⏳ Fixează machiajul pentru long-wear<br>🌿 Fără parabeni · testată dermatologic · vegan friendly<br><br>📌 Cum se aplică: ca ultim pas peste machiaj, sau oricând pe parcursul zilei.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p6',
+                name: 'Patch-uri pentru ochi Age Reset Complex',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Patch%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '👀⚡ Privire odihnită în 15 minute — hidratare intensă + efect lifting instant pentru conturul ochilor.',
+                type: 'Tratament contur ochi',
+                occasion: '10-15 minute, oricând',
+                notes: {
+                    extra: "✨ Active cheie:<br>💧 Hialuronat de sodiu, scualan, glicerină — hidratare intensă<br>🧬 Niacinamidă, tripeptide-5, hexapeptide-8 — reduc liniile fine<br>☕ Cofeină + acid ascorbic — luminozitate instant<br><br>📌 Cum se aplică: pe pielea curată, sub ochi, 10-15 minute."
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p7',
+                name: 'Rimel pentru alungire Royal Blue',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Albastru.mp4?tr=orig-true' }
+                ],
+                short: '☕👁️ Gene lungi, definite, nuanță maro naturală — perie moale care înfășoară fiecare geană, fără scămoșare.',
+                type: 'Machiaj — gene',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Beneficii:<br>🤎 Nuanță maro — look natural, luminos<br>🪶 Efect intens de alungire<br>🖌️ Perie moale, aplicare uniformă<br>🌿 Fără parabeni · testat dermatologic și oftalmologic<br><br>📌 Cum se aplică: de la rădăcină spre vârf, pe genele de sus și de jos.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/MAKEUP'
+            },
+            {
+                id: 'p8',
+                name: 'Cremă hidratantă delicată pentru piele uscată',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Creama%20Hidratanta%20Must%20Have%20Ediotion.mp4?tr=orig-true' }
+                ],
+                short: '💧🤍 Hidratare intensă și calmantă, fără senzație de grăsime — perfectă pentru ten uscat și sensibil, ideală și sub machiaj.',
+                type: 'Îngrijire facială',
+                occasion: 'Dimineața și seara',
+                notes: {
+                    extra: '✨ Active cheie:<br>🌿 Niacinamidă (vitamina B3) — întărește bariera pielii<br>🍃 Bisabolol — calmant, antiinflamator<br>🌵 Aloe vera — hidratează și calmează pielea sensibilă<br><br>📌 Cum se aplică: pe piele curățată, dimineața și seara.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            }
+,
+            {
+                id: 'p9',
+                                name: 'Home Clean',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Clean%20Home.mp4?tr=orig-true' }
+                ],
+                short: '🧼🌿 Curățenie eficientă, mirosuri plăcute, fără compromisuri — toată gama Home Clean într-un singur loc.',
+                type: 'Îngrijirea casei',
+                occasion: 'Gama completă',
+                notes: {
+                    extra: '✨ Ce găsești în gamă:<br>🧴 Detergenți și soluții de curățat multi-suprafață<br>🌸 Mirosuri plăcute, persistente<br>🏠 Formule eficiente, potrivite pentru toată casa<br><br>📌 Descoperă toată gama Home Clean pe site.'
+                },
+                buyLink: 'https://my.essens.com/category/HOME/HOME_CLEAN'
+            },
+            {
+                id: 'p10',
+                kind: 'promo',
+                name: 'Essens Moldova',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Essens%20Moldova.mp4?tr=orig-true' }
+                ],
+                short: '💙 Parfumuri, cosmetice și îngrijire premium — la prețuri corecte, direct din Europa.',
+                type: 'Prezentare brand',
+                notes: {
+                    extra: '✨ De ce Essens:<br>🇪🇺 Produse fabricate în Europa<br>💧 Parfumuri cu 20% esențe parfumate<br>🎁 Promoții constante și cadouri la comenzi<br><br>📌 Descoperă toată gama pe essens.md'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p11',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Pormo%20Luxury%20Parfumes.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p12',
+                                name: 'Body Mist',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Body%20Mist%20(2).mp4?tr=orig-true' }
+                ],
+                short: '🌸💦 Ceață parfumată, ușoară, perfectă pentru retuș rapid oricând, oriunde.',
+                type: 'Body mist',
+                occasion: 'Retuș rapid, oricând',
+                notes: {
+                    extra: '✨ De ce îl vei iubi:<br>🌤️ Textură ușoară, non-grasă<br>🌺 Arome fresh, potrivite pentru vară<br>🎒 Format practic, ideal de purtat cu tine<br><br>📌 Vezi toată gama Body Mist.'
+                },
+                buyLink: 'https://my.essens.com/search?s=body+mist'
+            },
+            {
+                id: 'p13',
+                                name: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Most%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🩷 Machiaj + îngrijire, editate special — produsele pe care le vrei toate în trusă.',
+                type: 'Machiaj & îngrijire',
+                occasion: 'Colecție editată',
+                notes: {
+                    extra: '✨ Ce cuprinde colecția:<br>💄 Machiaj: ruj, rimel, eyeliner, fond de ten<br>🧴 Îngrijire: cremă hidratantă, mască textilă<br>🎁 Perfectă ca set cadou sau completare de rutină<br><br>📌 Descoperă toată gama Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/MAKEUP'
+            },
+            {
+                id: 'p14',
+                                name: 'Body Mist',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Body%20Mist.mp4?tr=orig-true' }
+                ],
+                short: '🌸💦 Ceață parfumată, ușoară, perfectă pentru retuș rapid oricând, oriunde.',
+                type: 'Body mist',
+                occasion: 'Retuș rapid, oricând',
+                notes: {
+                    extra: '✨ De ce îl vei iubi:<br>🌤️ Textură ușoară, non-grasă<br>🌺 Arome fresh, potrivite pentru vară<br>🎒 Format practic, ideal de purtat cu tine<br><br>📌 Vezi toată gama Body Mist.'
+                },
+                buyLink: 'https://my.essens.com/search?s=body+mist'
+            },
+            {
+                id: 'p15',
+                                name: 'Aloe Vera',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Sprayuri%20Aloe%20Etc.mp4?tr=orig-true' }
+                ],
+                short: '🌵💧 De la geluri la spray-uri — puterea calmantă a aloe vera, în toată gama Essens.',
+                type: 'Îngrijire corp & păr',
+                occasion: 'Gama completă',
+                notes: {
+                    extra: '✨ Ce găsești în gamă:<br>💧 Geluri și spray-uri hidratante<br>🌿 Ingredient calmant, potrivit pentru piele sensibilă<br>🧴 Rutină completă, de la corp la păr<br><br>📌 Descoperă toată gama Aloe Vera.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/HAIR'
+            },
+            {
+                id: 'p16',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Luxury%20Parfume%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p17',
+                kind: 'promo',
+                name: 'Catalogul Essens',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Catalog.mp4?tr=orig-true' }
+                ],
+                short: '📖 Toată gama, într-un singur loc — răsfoiește catalogul complet și alege ce ți se potrivește.',
+                type: 'Catalog',
+                notes: {
+                    extra: '✨ Ce găsești în catalog:<br>🌸 Parfumuri pentru ea și el<br>💄 Machiaj și îngrijire<br>🎁 Oferte și seturi speciale<br><br>📌 Cere-mi catalogul complet în format digital.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p18',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Luxury%20Edition%20Parfume.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p19',
+                name: 'Ruj',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Must%20Have%20Edition%20Ruj.mp4?tr=orig-true' }
+                ],
+                short: '💋 Culoare intensă, texturi diverse — rujul potrivit pentru orice zi din colecția Must Have Edition.',
+                type: 'Machiaj — buze',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Ce oferă:<br>🎨 Nuanțe variate, de la nude la roșu aprins<br>💧 Texturi hidratante, confortabile<br>⏳ Rezistență îndelungată<br><br>📌 Descoperă toate rujurile din Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/MAKEUP'
+            },
+            {
+                id: 'p20',
+                                name: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Must%20Have%20Edition%20(2).mp4?tr=orig-true' }
+                ],
+                short: '🩷 Machiaj + îngrijire, editate special — produsele pe care le vrei toate în trusă.',
+                type: 'Machiaj & îngrijire',
+                occasion: 'Colecție editată',
+                notes: {
+                    extra: '✨ Ce cuprinde colecția:<br>💄 Machiaj: ruj, rimel, eyeliner, fond de ten<br>🧴 Îngrijire: cremă hidratantă, mască textilă<br>🎁 Perfectă ca set cadou sau completare de rutină<br><br>📌 Descoperă toată gama Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p21',
+                                name: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🩷 Machiaj + îngrijire, editate special — produsele pe care le vrei toate în trusă.',
+                type: 'Machiaj & îngrijire',
+                occasion: 'Colecție editată',
+                notes: {
+                    extra: '✨ Ce cuprinde colecția:<br>💄 Machiaj: ruj, rimel, eyeliner, fond de ten<br>🧴 Îngrijire: cremă hidratantă, mască textilă<br>🎁 Perfectă ca set cadou sau completare de rutină<br><br>📌 Descoperă toată gama Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p22',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Lux%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p23',
+                name: 'Eyeliner',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Eye%20Liner%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🖤 Linie precisă, definită, care rezistă toată ziua — conturul perfect pentru privirea ta.',
+                type: 'Machiaj — ochi',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Ce oferă:<br>✏️ Aplicare precisă, fără pete<br>⏳ Rezistență de lungă durată<br>👁️ Potrivit și pentru linii fine, și pentru wing eyeliner<br><br>📌 Descoperă toată colecția Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p24',
+                name: 'Femme Pulse',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Femme%20Pulse%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '💗 Un plus de răsfăț în rutina ta zilnică — parte din colecția Must Have Edition.',
+                type: 'Colecție editată',
+                notes: {
+                    extra: '✨ De ce să-l alegi:<br>🌸 Completează perfect rutina zilnică de frumusețe<br>🎁 Parte din colecția editată Must Have Edition<br><br>📌 Descoperă toată gama Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p25',
+                                name: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🩷 Machiaj + îngrijire, editate special — produsele pe care le vrei toate în trusă.',
+                type: 'Machiaj & îngrijire',
+                occasion: 'Colecție editată',
+                notes: {
+                    extra: '✨ Ce cuprinde colecția:<br>💄 Machiaj: ruj, rimel, eyeliner, fond de ten<br>🧴 Îngrijire: cremă hidratantă, mască textilă<br>🎁 Perfectă ca set cadou sau completare de rutină<br><br>📌 Descoperă toată gama Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p26',
+                name: 'Set Gel de Duș + Parfum',
+                gama: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Showert%20Gel%20+%20Parfum.mp4?tr=orig-true' }
+                ],
+                short: '🛁✨ Rutină completă, de la duș la parfum — setul perfect pentru un ritual de îngrijire de lux.',
+                type: 'Set cadou',
+                occasion: 'Cadou / răsfăț personal',
+                notes: {
+                    extra: '✨ Ce conține setul:<br>🧴 Gel de duș parfumat, din colecția Luxury<br>🌸 Parfum asortat, aceeași aromă<br>🎁 Perfect pentru cadou sau răsfăț personal<br><br>📌 Descoperă seturile din gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p27',
+                kind: 'promo',
+                name: 'Seturi & Colecții Essens',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Showert%20Gel%20+%20Parfum.mp4?tr=orig-true' }
+                ],
+                short: '🎁 Mai multe produse, un singur set — perfect pentru cadou sau pentru a-ți completa rutina la un preț mai bun.',
+                type: 'Set cadou',
+                occasion: 'Cadou',
+                notes: {
+                    extra: '✨ De ce alegi un set:<br>💰 Valoare mai bună per produs<br>🎀 Ambalaj potrivit pentru cadou<br>🧴 Combinații gândite: parfum + îngrijire, sau machiaj complet<br><br>📌 Descoperă toate seturile disponibile.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p28',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Luxury%20Parfumes.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p29',
+                name: 'Fond de ten',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Fond%20De%20Ten%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🤍 Acoperire naturală, finisaj uniform — bază perfectă pentru orice machiaj, din colecția Must Have Edition.',
+                type: 'Machiaj — ten',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Ce oferă:<br>🎯 Acoperire adaptabilă, de la lejeră la medie<br>🌤️ Finisaj natural, non-cakey<br>⏳ Rezistență pe parcursul zilei<br><br>📌 Descoperă toată colecția Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p30',
+                                name: 'Colostrum',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Colostrum.mp4?tr=orig-true' }
+                ],
+                short: '🌿✨ Suport pentru imunitate și vitalitate — colostrum bovin, într-o formulă simplă de folosit zilnic.',
+                type: 'Supliment',
+                occasion: 'Uz zilnic',
+                notes: {
+                    extra: '✨ De ce colostrum:<br>💪 Suport pentru sistemul imunitar<br>🌿 Ingredient natural, folosit zilnic<br>🔄 Disponibil și cu refill, pentru o rutină sustenabilă<br><br>📌 Descoperă toată gama Colostrum.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/SKIN'
+            },
+            {
+                id: 'p31',
+                name: 'Gummy Glow',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Gummy%20Glow.mp4?tr=orig-true' }
+                ],
+                short: '🍬✨ Un răsfăț dulce cu rol în rutina ta de frumusețe din interior — simplu de inclus în fiecare zi.',
+                type: 'Supliment',
+                occasion: 'Uz zilnic',
+                notes: {
+                    extra: '✨ De ce să le încerci:<br>🍬 Formă plăcută, ușor de integrat zilnic<br>✨ Gândite pentru rutina ta de frumusețe din interior<br><br>📌 Află mai multe despre Gummy Glow pe site.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p32',
+                name: 'Ruj clasic cremos',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Rujuri.mp4?tr=orig-true' }
+                ],
+                short: '💄 Textură cremoasă, confortabilă, culoare bogată — clasicul care nu lipsește din nicio trusă.',
+                type: 'Machiaj — buze',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Ce oferă:<br>🎨 Culoare bogată, aplicare uniformă<br>💧 Textură cremoasă, hidratantă<br>👄 Confort pe tot parcursul zilei<br><br>📌 Descoperă toate rujurile din Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/MAKEUP/LIPS'
+            },
+            {
+                id: 'p33',
+                name: 'Mască textilă de față',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Masca%20De%20Fata%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🧖‍♀️ 15 minute de răsfăț — hidratare rapidă și instant glow, oricând ai nevoie.',
+                type: 'Îngrijire facială',
+                occasion: '15 minute de răsfăț',
+                notes: {
+                    extra: '✨ De ce să o incluzi în rutină:<br>💧 Hidratare rapidă, intensă<br>✨ Efect instant de luminozitate<br>🕒 Perfectă pentru o pauză de self-care<br><br>📌 Descoperă toată colecția Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p34',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Luxury%20Parfumes.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p35',
+                name: 'Ruj lichid',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Ruj%20Promo.mp4?tr=orig-true' }
+                ],
+                short: '💧💋 Finisaj mat, aplicare lejeră — rujul lichid care rezistă la cafea, nu la stil.',
+                type: 'Machiaj — buze',
+                occasion: 'Zilnic',
+                notes: {
+                    extra: '✨ Ce oferă:<br>🎨 Finisaj mat, intens<br>💧 Textură lejeră, ușor de aplicat<br>⏳ Rezistență de lungă durată<br><br>📌 Descoperă toate rujurile din Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/MAKEUP/LIPS'
+            },
+            {
+                id: 'p36',
+                kind: 'tutorial',
+                name: 'Cum aplici corect parfumul',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Tut%20Aplicare%20Parfum.mp4?tr=orig-true' }
+                ],
+                short: '📍 Micile trucuri care fac diferența — de unde pulverizezi, cât de des reaplici și ce să eviți.',
+                type: 'Ghid',
+                notes: {
+                    extra: '✨ Trucuri rapide:<br>📍 Aplică pe punctele calde: încheieturi, gât, spatele genunchilor<br>🚫 Nu freca încheieturile una de alta — grăbește descompunerea aromei<br>👕 Pulverizează și pe haine (dacă materialul permite) pentru longevitate<br>🔄 Reaplică o dată la 4-6 ore, pentru parfumuri mai ușoare<br><br>📌 Descoperă toată gama de parfumuri Essens.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME'
+            },
+            {
+                id: 'p37',
+                kind: 'promo',
+                name: 'Stickere Essens',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Stikere%20Essens.mp4?tr=orig-true' }
+                ],
+                short: '🏷️ Detaliul mic care face diferența — stickere Essens pentru ambalarea comenzilor tale.',
+                type: 'Materiale brand',
+                notes: {
+                    extra: '✨ De ce sunt utile:<br>🎁 Perfecte pentru personalizarea coletelor<br>💙 Design oficial Essens<br><br>📌 Scrie-mi dacă vrei să afli cum le poți obține.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p38',
+                name: 'Șampon Aloe Vera',
+                gama: 'Aloe Vera',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Sampon%20Aloe%20Vera.mp4?tr=orig-true' }
+                ],
+                short: '🌿💆‍♀️ Curăță delicat, hidratează firul de păr — cu aloe vera, pentru păr moale și strălucitor.',
+                type: 'Îngrijire păr',
+                occasion: 'Uz frecvent',
+                notes: {
+                    extra: '✨ Beneficii:<br>🌿 Aloe vera — hidratare și calmare a scalpului<br>✨ Păr moale, strălucitor, ușor de pieptănat<br>🧴 Potrivit pentru uz frecvent<br><br>📌 Descoperă toată gama Aloe Vera.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/HAIR'
+            },
+            {
+                id: 'p39',
+                                name: 'Luxury Perfume Collection',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Luxury%20Parfume.mp4?tr=orig-true' }
+                ],
+                short: '🖤✨ Parfumuri de nișă, inspirate din lumea marilor case de lux — concentrație intensă, longevitate excepțională.',
+                type: 'Parfumuri de nișă',
+                occasion: 'Ediție limitată',
+                notes: {
+                    extra: '✨ Ce găsești în colecție:<br>🕯️ Arome inspirate din parfumuria de nișă<br>💎 Concentrație ridicată — sillage puternic<br>🎁 Ediție limitată, pentru cei care vor ceva diferit<br><br>📌 Descoperă toată gama Luxury Perfume Collection.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/PERFUME/LUXURY_PERFUME_COLLECTION'
+            },
+            {
+                id: 'p40',
+                name: 'Elastir',
+                gama: 'Must Have Edition',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Elastir%20Must%20Have%20Edition.mp4?tr=orig-true' }
+                ],
+                short: '🌸 Elasticitate și fermitate — grijă țintită pentru pielea ta, din colecția Must Have Edition.',
+                type: 'Îngrijire facială',
+                notes: {
+                    extra: '✨ De ce să-l încerci:<br>🌿 Gândit pentru elasticitatea pielii<br>🎁 Parte din colecția editată Must Have Edition<br><br>📌 Descoperă toată colecția Must Have Edition.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p41',
+                kind: 'promo',
+                name: 'Universul Essens',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Essens%20Prducts.mp4?tr=orig-true' }
+                ],
+                short: '🌍 Parfumuri, machiaj, îngrijire — tot ce ai nevoie, într-un singur brand de încredere.',
+                type: 'Prezentare brand',
+                notes: {
+                    extra: '✨ De ce Essens:<br>💧 Calitate europeană<br>🌸 Gamă variată: parfumuri, machiaj, îngrijire<br>🎁 Promoții constante<br><br>📌 Descoperă toată gama pe essens.md'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p42',
+                kind: 'tutorial',
+                name: 'Apă de colonie vs. toaletă vs. parfum',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Prezentare%203%20Tipuri%20De%20Parfum.mp4?tr=orig-true' }
+                ],
+                short: '🧪 Care e diferența, de fapt? Concentrația de esențe schimbă totul — intensitate și longevitate.',
+                type: 'Ghid',
+                notes: {
+                    extra: '✨ Diferența pe scurt:<br>🌸 Apă de colonie — concentrație mică, prospețime scurtă<br>💧 Apă de toaletă — concentrație medie, echilibrată<br>💎 Apă de parfum — concentrație ridicată, intensă și de durată<br><br>📌 Parfumurile Essens conțin 20% esențe parfumate.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p43',
+                name: 'Set Șampon Aloe Vera + Refill',
+                gama: 'Aloe Vera',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Sampon%20Aloe%20Vera%20Si%20Refil.mp4?tr=orig-true' }
+                ],
+                short: '♻️🌿 Aceeași formulă delicată, acum și cu refill — grijă pentru părul tău și pentru mediu.',
+                type: 'Îngrijire păr',
+                occasion: 'Uz frecvent',
+                notes: {
+                    extra: '✨ Beneficii:<br>🌿 Aloe vera — hidratare și calmare a scalpului<br>♻️ Refill economic, mai puțin plastic<br>✨ Păr moale, strălucitor<br><br>📌 Descoperă toată gama Aloe Vera.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/HAIR'
+            },
+            {
+                id: 'p44',
+                                name: 'Aloe Vera',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Aloe2.mp4?tr=orig-true' }
+                ],
+                short: '🌵💧 De la geluri la spray-uri — puterea calmantă a aloe vera, în toată gama Essens.',
+                type: 'Îngrijire corp & păr',
+                occasion: 'Gama completă',
+                notes: {
+                    extra: '✨ Ce găsești în gamă:<br>💧 Geluri și spray-uri hidratante<br>🌿 Ingredient calmant, potrivit pentru piele sensibilă<br>🧴 Rutină completă, de la corp la păr<br><br>📌 Descoperă toată gama Aloe Vera.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/HAIR'
+            },
+            {
+                id: 'p45',
+                name: 'Cremă de mâini',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Hand%20Cream.mp4?tr=orig-true' }
+                ],
+                short: '🤲✨ Hidratare rapidă, absorbție instant — mâini îngrijite, oricând, oriunde.',
+                type: 'Îngrijire mâini',
+                occasion: 'Oricând, oriunde',
+                notes: {
+                    extra: '✨ Beneficii:<br>💧 Hidratare intensă, fără senzație lipicioasă<br>⚡ Absorbție rapidă<br>🎒 Format practic, ideal de purtat cu tine<br><br>📌 Descoperă gama de creme de mâini.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY'
+            },
+            {
+                id: 'p46',
+                kind: 'promo',
+                name: 'Catalogul Essens',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Promo%20Catalog%202.mp4?tr=orig-true' }
+                ],
+                short: '📖 Toată gama, într-un singur loc — răsfoiește catalogul complet și alege ce ți se potrivește.',
+                type: 'Catalog',
+                notes: {
+                    extra: '✨ Ce găsești în catalog:<br>🌸 Parfumuri pentru ea și el<br>💄 Machiaj și îngrijire<br>🎁 Oferte și seturi speciale<br><br>📌 Cere-mi catalogul complet în format digital.'
+                },
+                buyLink: 'https://my.essens.com/830000081'
+            },
+            {
+                id: 'p47',
+                name: 'Set Colostrum + Refill',
+                gama: 'Colostrum',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Colostrum%20+%20Refil.mp4?tr=orig-true' }
+                ],
+                short: '♻️ Aceeași formulă, fără plastic în plus — pachet economic cu refill pentru rutina ta de colostrum.',
+                type: 'Supliment',
+                occasion: 'Uz zilnic',
+                notes: {
+                    extra: '✨ De ce să alegi refill-ul:<br>💪 Aceleași beneficii pentru imunitate<br>♻️ Mai puțin plastic, mai economic<br>🔄 Ideal pentru uz constant<br><br>📌 Descoperă toată gama Colostrum.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/SKIN'
+            },
+            {
+                id: 'p48',
+                                name: 'Aloe Vera',
+                images: [
+                    { video: 'https://ik.imagekit.io/zeims5bbx/Aloe.mp4?tr=orig-true' }
+                ],
+                short: '🌵💧 De la geluri la spray-uri — puterea calmantă a aloe vera, în toată gama Essens.',
+                type: 'Îngrijire corp & păr',
+                occasion: 'Gama completă',
+                notes: {
+                    extra: '✨ Ce găsești în gamă:<br>💧 Geluri și spray-uri hidratante<br>🌿 Ingredient calmant, potrivit pentru piele sensibilă<br>🧴 Rutină completă, de la corp la păr<br><br>📌 Descoperă toată gama Aloe Vera.'
+                },
+                buyLink: 'https://my.essens.com/category/BEAUTY/HAIR'
+            }
+        ];
+
+        const savedProducts = new Set();
+        let isMuted = true;
+        let discoverObserver = null;
+        const slideState = {};
+
+        // --- Tracking persistent al clipurilor deja vizionate -------------------
+        // Ținem minte (în localStorage, deci și după ce clientul închide
+        // aplicația/tab-ul) ce produse a văzut deja, ca să nu i le mai arătăm
+        // până nu le vede pe toate. Când toate au fost văzute, ciclul se
+        // resetează automat și pornim iar de la un amestec aleator complet.
+        const SEEN_STORAGE_KEY = 'essensSeenProductIds';
+
+        function loadSeenIds() {
+            try {
+                const raw = localStorage.getItem(SEEN_STORAGE_KEY);
+                const arr = raw ? JSON.parse(raw) : [];
+                return new Set(Array.isArray(arr) ? arr : []);
+            } catch (e) {
+                return new Set();
+            }
+        }
+
+        function saveSeenIds() {
+            try {
+                localStorage.setItem(SEEN_STORAGE_KEY, JSON.stringify(Array.from(seenIds)));
+            } catch (e) { /* localStorage indisponibil — continuăm fără persistență */ }
+        }
+
+        let seenIds = loadSeenIds();
+        let currentFeedIds = new Set();
+
+        // --- Limită de clipuri per intrare (economisește bandwidth) -------------
+        // După ~9-10 clipuri vizionate într-o singură deschidere a feed-ului,
+        // arătăm un ecran de final ("zid") în loc să continuăm la nesfârșit.
+        // La următoarea intrare, pragul se resetează și — datorită tracking-ului
+        // de mai sus — clipurile arătate vor fi altele, nevăzute încă.
+        let sessionLimit = 10;
+        let wallAppended = false;
+
+        function markProductSeen(id) {
+            if (!id || seenIds.has(id)) return;
+            seenIds.add(id);
+            saveSeenIds();
+        }
+
+        // Alege următorul "lot" de produse: prioritar cele nevăzute încă (amestecate
+        // aleator). Dacă nu mai există produse nevăzute (sau nu mai există altele
+        // în afara celor deja afișate în feed-ul curent), ciclul se resetează —
+        // se șterge lista de "văzute" și pornim din nou cu toată gama, aleator.
+        function nextProductBatch(excludeIds) {
+            const exclude = excludeIds || new Set();
+            let pool = PRODUCTS.filter(p => !seenIds.has(p.id) && !exclude.has(p.id));
+            if (pool.length === 0) {
+                seenIds = new Set();
+                saveSeenIds();
+                pool = PRODUCTS.filter(p => !exclude.has(p.id));
+                if (pool.length === 0) pool = PRODUCTS.slice();
+            }
+            return shuffleArray(pool);
+        }
+
+        function svgBag() {
+            return '<svg viewBox="0 0 24 24"><path d="M6 2l1.5 4h9L18 2"></path><path d="M3.5 8h17l-1.6 11.2a2 2 0 0 1-2 1.8H7.1a2 2 0 0 1-2-1.8L3.5 8z"></path></svg>';
+        }
+        function svgGift() {
+            return '<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="13" rx="1"></rect><line x1="12" y1="8" x2="12" y2="21"></line><path d="M3 8h18v4H3z"></path><path d="M12 8c-2-3-6-3-6 0s4 0 6 0z"></path><path d="M12 8c2-3 6-3 6 0s-4 0-6 0z"></path></svg>';
+        }
+        function svgShare() {
+            return '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><line x1="8.3" y1="10.7" x2="15.7" y2="6.3"></line><line x1="8.3" y1="13.3" x2="15.7" y2="17.7"></line></svg>';
+        }
+        function svgBookmark() {
+            return '<svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4.5L6 21V3z"></path></svg>';
+        }
+        function svgMuted() {
+            return '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"></path><line x1="16" y1="9" x2="22" y2="15"></line><line x1="22" y1="9" x2="16" y2="15"></line></svg>';
+        }
+        function svgUnmuted() {
+            return '<svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 5V4L8 9H4z"></path><path d="M16 8a5 5 0 0 1 0 8"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg>';
+        }
+        function svgPlayGlyph() {
+            return '<svg viewBox="0 0 24 24"><polygon points="8 5 19 12 8 19 8 5"></polygon></svg>';
+        }
+        function svgPauseGlyph() {
+            return '<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>';
+        }
+        function svgEndWall() {
+            return '<svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path><circle cx="12" cy="12" r="4"></circle></svg>';
+        }
+        function svgVerifiedBadge() {
+            return '<svg class="reel-ad-badge-check" viewBox="0 0 24 24"><path d="M12 2.4l2.3 1.4 2.7-.3 1 2.5 2.5 1-.3 2.7 1.4 2.3-1.4 2.3.3 2.7-2.5 1-1 2.5-2.7-.3-2.3 1.4-2.3-1.4-2.7.3-1-2.5-2.5-1 .3-2.7L2.4 12l1.4-2.3-.3-2.7 2.5-1 1-2.5 2.7.3z" fill="#1d9bf0" stroke="none"></path><path d="M8.5 12.2l2.3 2.3 4.7-4.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+        }
+
+        function shuffleArray(arr) {
+            const a = arr.slice();
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        function buildSlideHtml(p, idx, eagerFirstImage) {
+            const mediaHtml = p.images.map((item, i) => {
+                const isVideo = item && typeof item === 'object' && item.video;
+                const inner = isVideo
+                    ? `<video src="${item.video}" class="reel-video" muted loop playsinline preload="${i === 0 ? 'auto' : 'metadata'}"></video>`
+                    : `<img src="${item}" alt="${p.name}" loading="${eagerFirstImage && i === 0 ? 'eager' : 'lazy'}" onerror="this.classList.add('img-broken')">`;
+                return `<div class="reel-media${i === 0 ? ' is-current' : ''}" data-i="${i}">${inner}</div>`;
+            }).join('');
+            const dotsHtml = p.images.length > 1
+                ? p.images.map((_, i) => `<div class="reel-dot${i === 0 ? ' is-active' : ''}"></div>`).join('')
+                : '';
+            const dotsBlockHtml = dotsHtml ? `<div class="reel-dots">${dotsHtml}</div>` : '';
+            const hasVideo = p.images.some(item => item && typeof item === 'object' && item.video);
+            const muteBtnHtml = hasVideo
+                ? `<button class="reel-mute-btn" onclick="toggleMute(event)" aria-label="Sunet on/off">${svgMuted()}</button>`
+                : '';
+            const pauseIconHtml = hasVideo
+                ? `<div class="reel-pause-icon" id="pauseicon-${p.id}"></div>`
+                : '';
+            const notes = p.notes || {};
+            const chipsHtml = [p.type, p.occasion].filter(Boolean)
+                .map(text => `<span class="reel-detail-chip">${text}</span>`)
+                .join('');
+            const chipsBlockHtml = chipsHtml ? `<div class="reel-detail-chips">${chipsHtml}</div>` : '';
+            const noteRowsHtml = [['Vârf', notes.top], ['Inimă', notes.heart], ['Bază', notes.base]]
+                .filter(([, text]) => !!text)
+                .map(([label, text]) => `<div class="reel-note-row"><span class="reel-note-tag">${label}</span><span class="reel-note-text">${text}</span></div>`)
+                .join('');
+            const extraHtml = notes.extra ? `<div class="reel-desc-extra">${notes.extra}</div>` : '';
+
+            // Clipurile de produs au nume + descriere; clipurile promoționale/tutoriale
+            // (p.kind = 'promo' | 'tutorial') primesc în schimb un mic card "liquid
+            // glass" cu "ESSENS Oficial" și bifă albastră — semnalează clar că e
+            // conținut de brand/reclamă/ghid, nu fișa unui produs anume.
+            const isEditorial = p.kind === 'promo' || p.kind === 'tutorial';
+            const editorialTag = p.kind === 'tutorial' ? 'Ghid ESSENS' : 'Conținut official';
+            const infoHtml = isEditorial
+                ? `
+                    <div class="reel-ad-badge">
+                        <div class="reel-ad-badge-logo"><img src="logo_pink.png" alt="ESSENS" class="reel-ad-badge-logo-img"></div>
+                        <div class="reel-ad-badge-text">
+                            <span class="reel-ad-badge-name">ESSENS Official ${svgVerifiedBadge()}</span>
+                            <span class="reel-ad-badge-tag">${editorialTag}</span>
+                        </div>
+                    </div>`
+                : `
+                    <div class="reel-name">${p.name}</div>
+                    ${p.gama ? `<div class="reel-name-gama">${p.gama}</div>` : ''}
+                    ${p.inspiredBy ? `<div class="reel-name-sub">inspirat de ${p.inspiredBy}</div>` : ''}
+                    <div class="reel-desc" id="desc-${p.id}">
+                        <div class="reel-desc-short-wrap">
+                            <p class="reel-desc-short-text">${p.short}</p>
+                        </div>
+                        <div class="reel-desc-body">
+                            <div class="reel-desc-body-inner">
+                                <div class="reel-desc-full">${chipsBlockHtml}${noteRowsHtml}${extraHtml}</div>
+                            </div>
+                        </div>
+                        <button class="reel-desc-toggle" onclick="toggleDescription('${p.id}')">Citește mai mult</button>
+                    </div>`;
+
+            return `
+            <div class="reel-slide${isEditorial ? ' is-editorial' : ''}" data-id="${p.id}" data-index="${idx}" data-img-count="${p.images.length}">
+                <div class="reel-media-wrap" onclick="togglePlayPause('${p.id}')">${mediaHtml}</div>
+                <div class="reel-scrim-base"></div>
+                <div class="reel-scrim-expand"></div>
+                ${muteBtnHtml}
+                ${pauseIconHtml}
+                ${dotsBlockHtml}
+
+                <div class="reel-actions">
+                    <div class="reel-action is-buy">
+                        <a class="reel-action-btn js-product-link" href="${p.buyLink}" target="_blank" aria-label="Cumpără produsul">${svgBag()}</a>
+                        <span>Cumpără</span>
+                    </div>
+                    <div class="reel-action is-partner">
+                        <a class="reel-action-btn js-partner-link" href="https://www.essens.md/r-830000081" target="_blank" aria-label="Cumpără ca partener Essens">${svgGift()}<span class="reel-partner-discount-badge">-30%</span></a>
+                        <span>Cumpără ca<br>partener Essens</span>
+                    </div>
+                    <div class="reel-action is-share">
+                        <button class="reel-action-btn" onclick="shareProduct('${p.id}')" aria-label="Distribuie">${svgShare()}</button>
+                        <span>Distribuie</span>
+                    </div>
+                    <div class="reel-action is-save${savedProducts.has(p.id) ? ' is-saved' : ''}" id="save-${p.id}">
+                        <button class="reel-action-btn" onclick="toggleSave('${p.id}')" aria-label="Salvează">${svgBookmark()}</button>
+                        <span>Salvează</span>
+                    </div>
+                    <div class="reel-music-disc"></div>
+                </div>
+
+                <div class="reel-info">
+                    ${infoHtml}
+                </div>
+
+                <div class="reel-toast" id="toast-${p.id}"></div>
+            </div>`;
+        }
+
+        function renderDiscoverFeed(list) {
+            const items = list || PRODUCTS;
+            const feed = document.getElementById('discoverFeed');
+            feed.innerHTML = items.map((p, idx) => buildSlideHtml(p, idx, idx === 0)).join('');
+        }
+
+        function appendDiscoverFeedSlides(list) {
+            if (!list || !list.length) return;
+            const feed = document.getElementById('discoverFeed');
+            const startIdx = feed.querySelectorAll('.reel-slide').length;
+            const html = list.map((p, i) => buildSlideHtml(p, startIdx + i, false)).join('');
+            feed.insertAdjacentHTML('beforeend', html);
+            const allSlides = feed.querySelectorAll('.reel-slide');
+            const newSlides = Array.from(allSlides).slice(allSlides.length - list.length);
+            newSlides.forEach(s => {
+                if (discoverObserver) discoverObserver.observe(s);
+                initSwipeTracking(s);
+            });
+        }
+
+        // Mesaje jucăușe, ca o glumă blândă, nu ca un perete care te oprește brusc.
+        const END_WALL_MESSAGES = [
+            {
+                title: 'Ups, ai golit tot raftul de azi! 😅',
+                text: 'Nu ești tu lacom(ă), clipurile sunt doar foarte convingătoare. Revino puțin mai târziu după altele proaspete — până atunci, te așteptăm pe site 👇'
+            },
+            {
+                title: 'Stop! Aici se termină teancul de azi 🛍️',
+                text: 'Ai defilat prin tot ce aveam nou. Hai să continuăm pe site, unde poți vedea totul în liniște, fără grabă.'
+            },
+            {
+                title: 'Gata, ne-am jucat destul pentru azi 👀',
+                text: 'Clipurile noi apar curând — promitem. Până le pregătim, treci pe site și alintă-te cu ce ai văzut deja.'
+            }
+        ];
+
+        // Alege un produs "următor", nevăzut de preferință, ca fundal blurat —
+        // dă senzația reală că se încarcă deja clipul viitor, doar că e vălurit.
+        function pickPreviewProduct() {
+            const pool = PRODUCTS.filter(p => !currentFeedIds.has(p.id));
+            const list = pool.length ? pool : PRODUCTS;
+            const pick = list[Math.floor(Math.random() * list.length)];
+            const media = pick && pick.images && pick.images.find(im => im && im.video);
+            return media ? media.video : null;
+        }
+
+        function buildEndWallHtml(idx) {
+            const previewSrc = pickPreviewProduct();
+            const previewHtml = previewSrc
+                ? `<video class="reel-end-preview" src="${previewSrc}" autoplay muted loop playsinline></video>`
+                : '';
+            const msg = END_WALL_MESSAGES[Math.floor(Math.random() * END_WALL_MESSAGES.length)];
+            return `
+            <div class="reel-slide reel-end-wall" data-id="wall-end" data-index="${idx}">
+                ${previewHtml}
+                <div class="reel-end-bg"></div>
+                <div class="reel-end-scrim"></div>
+                <div class="reel-end-content">
+                    <div class="reel-end-icon">
+                        <span class="reel-end-emoji">🛍️</span>
+                        <span class="reel-end-cart">🛒</span>
+                    </div>
+                    <h3 class="reel-end-title">${msg.title}</h3>
+                    <p class="reel-end-text">${msg.text}</p>
+                    <a class="reel-end-btn" href="https://my.essens.com/830000081" target="_blank" rel="noopener" onclick="stopEndWallAmbient()">${svgBag()}<span>Vezi produsele pe site</span></a>
+                </div>
+            </div>`;
+        }
+
+        function appendEndWallSlide() {
+            if (wallAppended) return;
+            wallAppended = true;
+            const feed = document.getElementById('discoverFeed');
+            const idx = feed.querySelectorAll('.reel-slide').length;
+            feed.insertAdjacentHTML('beforeend', buildEndWallHtml(idx));
+            const wallEl = feed.querySelector('.reel-end-wall');
+            if (wallEl && discoverObserver) discoverObserver.observe(wallEl);
+        }
+
+        // Când clientul ajunge la ultimul clip din lotul acestei sesiuni (deja
+        // limitat la sessionLimit), în loc să continuăm la nesfârșit, arătăm
+        // ecranul de final ("zid"). La următoarea deschidere a feed-ului,
+        // limita se resetează și — grație tracking-ului de mai sus — vor fi
+        // clipuri noi, nevăzute încă.
+        function maybeGrowFeed(slideEl) {
+            const feed = document.getElementById('discoverFeed');
+            const slides = feed.querySelectorAll('.reel-slide');
+            const lastSlide = slides[slides.length - 1];
+            if (slideEl !== lastSlide || wallAppended) return;
+
+            appendEndWallSlide();
+        }
+
+        function initDiscoverObserver() {
+            const feed = document.getElementById('discoverFeed');
+            const slides = feed.querySelectorAll('.reel-slide');
+
+            discoverObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio > 0.6) {
+                        // IMPORTANT: threshold-ul are 2 praguri (0.6 și 1), deci în timpul
+                        // unei singure derulări observer-ul declanșează callback-ul de 2 ori
+                        // (o dată la trecerea de 0.6, o dată la atingerea lui 1). Fără verificarea
+                        // de mai jos, activateSlide() (care resetează video-ul la 0:00) se apela
+                        // de 2 ori pe aceeași glisare — asta cauza clipul care "sare" înapoi la
+                        // început chiar când animația de scroll se oprea în centru.
+                        if (!entry.target.classList.contains('is-active')) {
+                            activateSlide(entry.target);
+                        }
+                        maybeGrowFeed(entry.target);
+                    } else {
+                        deactivateSlide(entry.target);
+                    }
+                });
+            }, { root: feed, threshold: [0, 0.6, 1] });
+
+            slides.forEach(s => {
+                discoverObserver.observe(s);
+                initSwipeTracking(s);
+            });
+        }
+
+        // Swipe orizontal clasic (ca la un carusel foto TikTok), implementat prin
+        // pointer events în loc de scroll nativ: touch-action:pan-y lasă gestul
+        // vertical să treacă mereu spre feed, iar noi preluăm doar mișcarea clar
+        // orizontală — de-asta nu mai blochează derularea în jos.
+        function initSwipeTracking(slideEl) {
+            const wrap = slideEl.querySelector('.reel-media-wrap');
+            if (!wrap || wrap.dataset.swipeBound) return;
+            wrap.dataset.swipeBound = '1';
+            const id = slideEl.getAttribute('data-id');
+
+            let dragging = false;
+            let axis = null; // null (nedeterminat) | 'x' | 'y'
+            let pointerId = null;
+            let startX = 0, startY = 0, dx = 0;
+
+            const getIndex = () => (slideState[id] && slideState[id].index) || 0;
+            const getCount = () => parseInt(slideEl.getAttribute('data-img-count'), 10) || 1;
+            const width = () => wrap.clientWidth || 1;
+
+            function place(px, animate) {
+                wrap.classList.toggle('is-dragging', !animate);
+                wrap.style.transform = `translateX(${px}px)`;
+            }
+
+            function snapTo(index) {
+                const clamped = Math.max(0, Math.min(index, getCount() - 1));
+                place(-clamped * width(), true);
+                if (clamped !== getIndex()) setActiveImage(slideEl, id, clamped);
+            }
+
+            wrap.addEventListener('pointerdown', (e) => {
+                if (getCount() <= 1 || e.pointerType === 'mouse' && e.button !== 0) return;
+                dragging = true;
+                axis = null;
+                pointerId = e.pointerId;
+                startX = e.clientX;
+                startY = e.clientY;
+                dx = 0;
+            });
+
+            wrap.addEventListener('pointermove', (e) => {
+                if (!dragging || e.pointerId !== pointerId) return;
+                dx = e.clientX - startX;
+                const dy = e.clientY - startY;
+
+                if (axis === null) {
+                    if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+                    axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+                    if (axis === 'x') {
+                        wrap.setPointerCapture(pointerId);
+                    } else {
+                        // gest vertical: ne oprim complet, browserul preia scroll-ul feed-ului
+                        dragging = false;
+                        return;
+                    }
+                }
+
+                if (axis === 'x') {
+                    e.preventDefault();
+                    place(-getIndex() * width() + dx, false);
+                }
+            }, { passive: false });
+
+            function endDrag() {
+                if (!dragging || axis !== 'x') { dragging = false; axis = null; return; }
+                dragging = false;
+                axis = null;
+                const threshold = width() * 0.18;
+                let target = getIndex();
+                if (dx <= -threshold) target += 1;
+                else if (dx >= threshold) target -= 1;
+                snapTo(target);
+            }
+
+            wrap.addEventListener('pointerup', endDrag);
+            wrap.addEventListener('pointercancel', endDrag);
+
+            // Repoziționează instant strip-ul (fără animație) dacă lățimea se
+            // schimbă, ex. la rotirea telefonului.
+            window.addEventListener('resize', () => place(-getIndex() * width(), false));
+        }
+
+        function setActiveImage(slideEl, id, newIndex) {
+            const count = parseInt(slideEl.getAttribute('data-img-count'), 10);
+            if (count <= 1) return;
+            const wrapped = Math.max(0, Math.min(newIndex, count - 1));
+            const state = slideState[id] || { index: 0 };
+            if (state.index === wrapped) return;
+            state.index = wrapped;
+            slideState[id] = state;
+
+            slideEl.querySelectorAll('.reel-media').forEach(m => {
+                m.classList.toggle('is-current', parseInt(m.getAttribute('data-i'), 10) === wrapped);
+            });
+            slideEl.querySelectorAll('.reel-dot').forEach((dot, i) => {
+                dot.classList.toggle('is-active', i === wrapped);
+            });
+
+            pauseAllVideos(slideEl);
+            cancelVideoPlay(slideEl);
+            if (slideEl.classList.contains('is-active')) {
+                scheduleVideoPlay(slideEl, true);
+            }
+        }
+
+        // --- Fundal muzical discret pentru ecranul de final ---------------------
+        // Redăm break.mp3 (45s) ca fundal pentru acel ecran. Volumul e fixat la
+        // 60% din volumul folosit de restul conținutului cu sunet din feed
+        // (video-urile redau la volum 1.0), ca să nu fie brusc/strident.
+        // Respectă starea de mute a utilizatorului: dacă a oprit sunetul din
+        // feed, rămâne oprit și aici.
+        const END_WALL_AUDIO_VOLUME = 0.6;
+        let endWallAudioEl = null;
+
+        function getEndWallAudio() {
+            if (!endWallAudioEl) {
+                endWallAudioEl = new Audio('break.mp3');
+                endWallAudioEl.loop = true;
+                endWallAudioEl.preload = 'auto';
+                endWallAudioEl.volume = END_WALL_AUDIO_VOLUME;
+            }
+            return endWallAudioEl;
+        }
+
+        function startEndWallAmbient() {
+            if (isMuted) return;
+            try {
+                const audio = getEndWallAudio();
+                audio.volume = END_WALL_AUDIO_VOLUME;
+                audio.currentTime = 0;
+                audio.play().catch(() => { /* redare blocată de browser - ignorăm */ });
+            } catch (e) { /* audio indisponibil - nu blocăm restul experienței */ }
+        }
+
+        function stopEndWallAmbient() {
+            if (!endWallAudioEl) return;
+            try {
+                endWallAudioEl.pause();
+                endWallAudioEl.currentTime = 0;
+            } catch (e) { }
+        }
+
+        function activateSlide(slideEl) {
+            slideEl.classList.add('is-active');
+            if (slideEl.classList.contains('reel-end-wall')) {
+                startEndWallAmbient();
+                return;
+            }
+
+            const disc = slideEl.querySelector('.reel-music-disc');
+            if (disc) disc.classList.add('is-playing');
+            scheduleVideoPlay(slideEl, true);
+            markProductSeen(slideEl.getAttribute('data-id'));
+
+            const hasVideo = !!slideEl.querySelector('.reel-video');
+            if (hasVideo && isMuted) {
+                showSoundPrompt();
+            } else {
+                hideSoundPrompt();
+            }
+        }
+
+        function deactivateSlide(slideEl) {
+            slideEl.classList.remove('is-active');
+            if (slideEl.classList.contains('reel-end-wall')) {
+                stopEndWallAmbient();
+            }
+            const disc = slideEl.querySelector('.reel-music-disc');
+            if (disc) disc.classList.remove('is-playing');
+            cancelVideoPlay(slideEl);
+            pauseAllVideos(slideEl);
+        }
+
+        const pendingVideoPlay = {};
+
+        function scheduleVideoPlay(slideEl, resetTime) {
+            cancelVideoPlay(slideEl);
+            const id = slideEl.getAttribute('data-id');
+            const mediaEl = slideEl.querySelector('.reel-media.is-current');
+            const video = mediaEl ? mediaEl.querySelector('video') : null;
+            if (!mediaEl || !video) return;
+
+            const timeoutId = setTimeout(() => {
+                delete pendingVideoPlay[id];
+                if (slideEl.classList.contains('is-active')) {
+                    playCurrentVideo(slideEl, resetTime);
+                }
+            }, 60);
+            pendingVideoPlay[id] = { timeoutId };
+        }
+
+        function cancelVideoPlay(slideEl) {
+            const id = slideEl.getAttribute('data-id');
+            const pending = pendingVideoPlay[id];
+            if (pending) {
+                clearTimeout(pending.timeoutId);
+                delete pendingVideoPlay[id];
+            }
+        }
+
+        function playCurrentVideo(slideEl, resetTime) {
+            const current = slideEl.querySelector('.reel-media.is-current video');
+            if (current) {
+                current.muted = isMuted;
+                if (resetTime) current.currentTime = 0;
+                current.play().catch(() => {});
+            }
+        }
+
+        function pauseAllVideos(slideEl) {
+            slideEl.querySelectorAll('.reel-media video').forEach(v => v.pause());
+        }
+
+        function toggleMute(event) {
+            if (event) event.stopPropagation();
+            isMuted = !isMuted;
+            document.querySelectorAll('.reel-video').forEach(v => { v.muted = isMuted; });
+            document.querySelectorAll('.reel-mute-btn').forEach(btn => {
+                btn.innerHTML = isMuted ? svgMuted() : svgUnmuted();
+            });
+            hideSoundPrompt();
+            if (!isMuted) disarmScrollUnmute();
+        }
+
+        // --- Activare sunet: prompt central (stil TikTok) + activare automată la scroll ---
+        function showSoundPrompt() {
+            const prompt = document.getElementById('soundPrompt');
+            const icon = document.getElementById('soundPromptIcon');
+            if (!prompt || !icon) return;
+            icon.innerHTML = svgMuted();
+            prompt.classList.add('show');
+        }
+
+        function hideSoundPrompt() {
+            const prompt = document.getElementById('soundPrompt');
+            if (prompt) prompt.classList.remove('show');
+        }
+
+        function unmuteSound(event) {
+            if (event) event.stopPropagation();
+            if (!isMuted) { hideSoundPrompt(); return; }
+            isMuted = false;
+            document.querySelectorAll('.reel-video').forEach(v => { v.muted = false; });
+            document.querySelectorAll('.reel-mute-btn').forEach(btn => {
+                btn.innerHTML = svgUnmuted();
+            });
+            hideSoundPrompt();
+            disarmScrollUnmute();
+        }
+
+        let scrollUnmuteHandler = null;
+
+        function armScrollUnmute() {
+            const feed = document.getElementById('discoverFeed');
+            if (!feed || !isMuted) return;
+            disarmScrollUnmute();
+            scrollUnmuteHandler = () => unmuteSound();
+            feed.addEventListener('touchmove', scrollUnmuteHandler, { passive: true, once: true });
+            feed.addEventListener('wheel', scrollUnmuteHandler, { passive: true, once: true });
+            feed.addEventListener('scroll', scrollUnmuteHandler, { passive: true, once: true });
+        }
+
+        function disarmScrollUnmute() {
+            const feed = document.getElementById('discoverFeed');
+            if (feed && scrollUnmuteHandler) {
+                feed.removeEventListener('touchmove', scrollUnmuteHandler);
+                feed.removeEventListener('wheel', scrollUnmuteHandler);
+                feed.removeEventListener('scroll', scrollUnmuteHandler);
+            }
+            scrollUnmuteHandler = null;
+        }
+
+        function togglePlayPause(id) {
+            const slideEl = document.querySelector(`.reel-slide[data-id="${id}"]`);
+            if (!slideEl) return;
+            const video = slideEl.querySelector('.reel-media.is-current video');
+            if (!video) return;
+            const icon = document.getElementById(`pauseicon-${id}`);
+            if (video.paused) {
+                video.play().catch(() => {});
+                flashPlayIcon(icon, svgPlayGlyph());
+            } else {
+                video.pause();
+                flashPlayIcon(icon, svgPauseGlyph());
+            }
+        }
+
+        function flashPlayIcon(icon, svg) {
+            if (!icon) return;
+            icon.innerHTML = svg;
+            icon.classList.add('show');
+            clearTimeout(icon._t);
+            icon._t = setTimeout(() => icon.classList.remove('show'), 550);
+        }
+
+        function toggleDescription(id) {
+            const desc = document.getElementById(`desc-${id}`);
+            if (!desc) return;
+            desc.classList.toggle('expanded');
+            const isExpanded = desc.classList.contains('expanded');
+            const slide = desc.closest('.reel-slide');
+            if (slide) slide.classList.toggle('desc-open', isExpanded);
+            const btn = desc.querySelector('.reel-desc-toggle');
+            if (btn) btn.textContent = isExpanded ? 'Arată mai puțin' : 'Citește mai mult';
+        }
+
+        function toggleSave(id) {
+            const wrap = document.getElementById(`save-${id}`);
+            if (savedProducts.has(id)) {
+                savedProducts.delete(id);
+                wrap.classList.remove('is-saved');
+                showToast(id, 'Eliminat din salvate');
+            } else {
+                savedProducts.add(id);
+                wrap.classList.add('is-saved');
+                showToast(id, 'Salvat ♥');
+            }
+        }
+
+        function shareProduct(id) {
+            const product = PRODUCTS.find(p => p.id === id);
+            const shareData = {
+                title: `${product.name} · ESSENS`,
+                text: product.short,
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData).catch(() => {});
+            } else if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareData.url).then(() => {
+                    showToast(id, 'Link copiat!');
+                }).catch(() => {
+                    showToast(id, 'Nu s-a putut copia linkul');
+                });
+            }
+        }
+
+        function showToast(id, message) {
+            const toast = document.getElementById(`toast-${id}`);
+            if (!toast) return;
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => toast.classList.remove('show'), 1600);
+        }
+
+        // Ține evidența dacă noi am împins o intrare în istoric pentru ecranul
+        // de feed, ca să știm exact ce să facem la deschidere/închidere/back.
+        // --- Comision pe linkurile directe de produs ---------------------------
+        // Linkurile "link direct catre el" (paginile exacte de produs) nu conțin
+        // ID-ul de partener în URL — platforma ESSENS nu suportă parametru de
+        // atribuire pe link. Comisionul se acordă doar dacă vizitatorul a trecut
+        // măcar o dată prin linkul simplu de cumpărare (my.essens.com/830000081),
+        // care setează un cookie de prim-parte pe domeniul essens.
+        // IMPORTANT: NU folosim aici linkul de tip r-830000081 (acela e link de
+        // ÎNREGISTRARE partener, folosit strict la butonul "Activează Contul tău
+        // de Membru" / "Cumpără ca partener Essens") — pentru cumpărare simplă cu
+        // comision folosim doar linkul simplu, fără prefixul "r-".
+        // La primul click pe un link direct de produs în această sesiune,
+        // deschidem întâi (pe fundal, în același tab nou) linkul simplu ca să se
+        // seteze cookie-ul, apoi redirecționăm acel tab spre produsul cerut.
+        // Din al doilea click încolo cookie-ul e deja setat, deci navigăm direct.
+        const ESSENS_SIMPLE_PURCHASE_LINK = 'https://my.essens.com/830000081';
+        let essensReferralPrimed = false;
+        try { essensReferralPrimed = sessionStorage.getItem('essensReferralPrimed') === '1'; } catch (e) { }
+
+        function getEssensReferralLink() {
+            return ESSENS_SIMPLE_PURCHASE_LINK;
+        }
+
+        function markEssensReferralPrimed() {
+            essensReferralPrimed = true;
+            try { sessionStorage.setItem('essensReferralPrimed', '1'); } catch (e) { }
+        }
+
+        document.addEventListener('click', function (event) {
+            const link = event.target.closest('.js-product-link');
+            if (!link) return;
+
+            const targetUrl = link.getAttribute('href');
+            // Dacă linkul conține deja ID-ul de partener (ex: my.essens.com/830000081),
+            // e deja atribuit — navigăm normal, fără priming.
+            if (!targetUrl || targetUrl.indexOf('830000081') !== -1) return;
+            if (essensReferralPrimed) return;
+
+            event.preventDefault();
+            const refUrl = getEssensReferralLink();
+            const refTab = window.open(refUrl, '_blank');
+            markEssensReferralPrimed();
+
+            if (refTab) {
+                setTimeout(function () {
+                    try { refTab.location.href = targetUrl; }
+                    catch (e) {
+                        try { refTab.location = targetUrl; }
+                        catch (e2) { window.open(targetUrl, '_blank'); }
+                    }
+                }, 900);
+            } else {
+                // Popup blocat de browser - deschidem direct produsul, fără priming.
+                window.open(targetUrl, '_blank');
+            }
+        }, true);
+
+        let discoverHistoryPushed = false;
+
+        function openDiscover() {
+            const overlay = document.getElementById('discoverOverlay');
+            overlay.classList.add('open');
+            overlay.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('discover-open');
+
+            // Împingem o intrare în istoric doar pentru ecranul de feed. Astfel,
+            // primul back (fizic sau din browser) închide doar feed-ul și te
+            // lasă pe pagina principală a site-ului — nu te scoate de pe site.
+            if (!discoverHistoryPushed) {
+                history.pushState({ discoverOpen: true }, '', '#discover');
+                discoverHistoryPushed = true;
+            }
+
+            if (discoverObserver) discoverObserver.disconnect();
+
+            wallAppended = false;
+            sessionLimit = Math.random() < 0.5 ? 9 : 10;
+            currentFeedIds = new Set();
+            const batch = nextProductBatch(currentFeedIds).slice(0, sessionLimit);
+            batch.forEach(p => currentFeedIds.add(p.id));
+
+            renderDiscoverFeed(batch);
+            document.getElementById('discoverFeed').scrollTop = 0;
+            initDiscoverObserver();
+            armScrollUnmute();
+        }
+
+        function closeDiscover(fromPopstate) {
+            const overlay = document.getElementById('discoverOverlay');
+            overlay.classList.remove('open');
+            overlay.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('discover-open');
+            document.querySelectorAll('.reel-slide').forEach(s => {
+                cancelVideoPlay(s);
+                pauseAllVideos(s);
+            });
+            if (discoverObserver) discoverObserver.disconnect();
+            disarmScrollUnmute();
+            hideSoundPrompt();
+            stopEndWallAmbient();
+
+            // Nu lăsăm butonul de back al telefonului/browser-ului să scoată
+            // utilizatorul de pe tot site-ul cât timp era doar pe ecranul de
+            // feed — acel back trebuie să închidă doar feed-ul. Dacă închiderea
+            // vine din UI (buton X), și mai există în istoric intrarea împinsă
+            // la deschiderea feed-ului, o "consumăm" cu history.back() ca să
+            // rămânem sincronizați; dacă închiderea vine deja dintr-un popstate
+            // (utilizatorul chiar a apăsat back), nu mai umblăm la istoric.
+            if (discoverHistoryPushed) {
+                discoverHistoryPushed = false;
+                if (!fromPopstate) {
+                    history.back();
+                }
+            }
+        }
+
     </script>
 </body>
 
