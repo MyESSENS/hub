@@ -101,6 +101,101 @@
             pointer-events: none;
         }
 
+        /* --- COOKIE BANNER SIMPLU --- */
+        .cookie-banner {
+            position: fixed;
+            left: 16px;
+            right: 16px;
+            bottom: 16px;
+            max-width: 420px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            box-shadow: 0 8px 26px rgba(45, 38, 56, 0.16);
+            border: 1px solid #ece7f4;
+            padding: 18px 20px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cookie-banner__text {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: #635c70;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cookie-banner__label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8a4fff;
+        }
+
+        .cookie-banner__text a {
+            color: #8a4fff;
+            text-decoration: underline;
+        }
+
+        .cookie-banner__divider {
+            height: 1px;
+            background: #f0ecf8;
+            margin: 0 -20px;
+        }
+
+        .cookie-banner__actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cookie-banner__btn {
+            padding: 7px 14px;
+            border-radius: 9px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.15s ease, background 0.15s ease;
+        }
+
+        .cookie-banner__btn:active {
+            opacity: 0.75;
+        }
+
+        .cookie-banner__btn--accept {
+            background: #f4eeff;
+            color: #8a4fff;
+        }
+
+        .cookie-banner__btn--decline {
+            color: #938c9f;
+        }
+
+        @media (max-width: 420px) {
+            .cookie-banner {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                padding: 16px 18px;
+            }
+        }
+
         /* --- 2. ECRANUL HERO MINIMALIST --- */
         .hero-section {
             position: fixed;
@@ -2122,6 +2217,18 @@
 
 <body class="loading">
 
+    <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Consimțământ cookie-uri">
+        <div class="cookie-banner__text">
+            <span class="cookie-banner__label">Cookie-uri</span>
+            Acest site utilizează fișiere cookie tehnice, necesare funcționării corecte a platformei, precum și cookie-uri de analiză a traficului, în scopul optimizării experienței de navigare.
+        </div>
+        <div class="cookie-banner__divider"></div>
+        <div class="cookie-banner__actions">
+            <div class="cookie-banner__btn cookie-banner__btn--decline" onclick="handleCookieChoice(false)">Refuz</div>
+            <div class="cookie-banner__btn cookie-banner__btn--accept" onclick="handleCookieChoice(true)">Accept</div>
+        </div>
+    </div>
+
     <div class="scroll-progress-bar" id="scrollProgressBar"></div>
 
     <svg width="0" height="0" style="position:absolute">
@@ -2936,7 +3043,12 @@
                         document.body.classList.add('is-transitioning');
                         document.body.classList.remove('loading');
                         document.body.classList.add('scrolled');
-                        setTimeout(() => document.body.classList.remove('is-transitioning'), 900);
+                        setTimeout(() => {
+                            document.body.classList.remove('is-transitioning');
+                            if (typeof window.revealCookieBanner === 'function') {
+                                window.revealCookieBanner();
+                            }
+                        }, 900);
                     }, 200);
                 }
 
@@ -4419,6 +4531,13 @@
             if (!targetUrl || targetUrl.indexOf('830000081') !== -1) return;
             if (essensReferralPrimed) return;
 
+            // Dacă userul a REFUZAT cookie-urile din banner, nu mai facem priming
+            // (nu mai deschidem tab-ul ascuns care setează cookie-ul de comision
+            // pe my.essens.com) — navigăm direct spre produsul cerut.
+            let cookieConsent = null;
+            try { cookieConsent = localStorage.getItem('essensCookieConsent'); } catch (e) { }
+            if (cookieConsent === 'declined') return;
+
             event.preventDefault();
             const refUrl = getEssensReferralLink();
             const refTab = window.open(refUrl, '_blank');
@@ -4497,6 +4616,83 @@
             }
         }
 
+    </script>
+
+    <script>
+        (function () {
+            var COOKIE_KEY = 'essensCookieConsent';
+
+            function getStoredConsent() {
+                try { return localStorage.getItem(COOKIE_KEY); } catch (e) { return null; }
+            }
+
+            function storeConsent(value) {
+                try { localStorage.setItem(COOKIE_KEY, value); } catch (e) { }
+            }
+
+            var alreadyShown = false;
+            var bannerHistoryPushed = false;
+
+            function showBanner() {
+                if (alreadyShown) return;
+                var banner = document.getElementById('cookieBanner');
+                if (!banner || getStoredConsent()) return;
+                alreadyShown = true;
+                banner.classList.add('show');
+
+                // Împingem o intrare în istoric doar pentru banner, ca butonul
+                // de back (fizic sau al browserului) să-l închidă DOAR pe el,
+                // nu să scoată userul de pe site.
+                if (!bannerHistoryPushed) {
+                    history.pushState({ cookieBannerOpen: true }, '', location.pathname + location.search + location.hash);
+                    bannerHistoryPushed = true;
+                }
+            }
+
+            function hideBanner(fromPopstate) {
+                var banner = document.getElementById('cookieBanner');
+                if (!banner) return;
+                banner.classList.remove('show');
+
+                if (bannerHistoryPushed) {
+                    bannerHistoryPushed = false;
+                    if (!fromPopstate) {
+                        history.back();
+                    }
+                }
+            }
+
+            window.handleCookieChoice = function (accepted) {
+                storeConsent(accepted ? 'accepted' : 'declined');
+                hideBanner(false);
+            };
+
+            // Apelată din scriptul ecranului de loading, imediat după ce
+            // tranziția către pagina principală s-a încheiat complet.
+            window.revealCookieBanner = function () {
+                setTimeout(showBanner, 350);
+            };
+
+            // Fallback: dacă din orice motiv semnalul de mai sus nu vine
+            // (ex. body-ul nu a avut niciodată clasa "loading"), afișăm
+            // totuși bannerul, ca să nu rămână userul fără el.
+            document.addEventListener('DOMContentLoaded', function () {
+                if (!document.body.classList.contains('loading')) {
+                    setTimeout(showBanner, 1200);
+                }
+            });
+
+            // Butonul de back (fizic, gest sau al browserului): dacă bannerul
+            // e deschis, îl închidem DOAR pe el (fără să înregistrăm un refuz
+            // explicit) și oprim aici — nu lăsăm back-ul să scoată userul de
+            // pe site.
+            window.addEventListener('popstate', function () {
+                var banner = document.getElementById('cookieBanner');
+                if (banner && banner.classList.contains('show')) {
+                    hideBanner(true);
+                }
+            });
+        })();
     </script>
 </body>
 
